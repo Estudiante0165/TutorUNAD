@@ -1,0 +1,4643 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TutorUNAD - Plataforma Web de Tutorías entre Estudiantes (UNAD ECBTI)</title>
+    <meta name="description" content="Plataforma web de tutorías académicas colaborativas entre pares para la Universidad Nacional Abierta y a Distancia (UNAD, ECBTI) con gamificación, muro de dudas y chat en tiempo real." />
+    <meta property="og:title" content="TutorUNAD - Plataforma Web de Tutorías entre Estudiantes" />
+    <meta property="og:description" content="Aprende y orienta a compañeros en asignaturas de la ECBTI: Cálculo, Programación, Álgebra y más con reputación gamificada." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Hoja de Estilos Oficial UNAD -->
+    <link rel="stylesheet" href="styles.css">
+    <style id="embedded-unad-styles">
+/**
+ * TutorUNAD - Hoja de Estilos Oficial (CSS3 Puro con Variables y Diseño Responsive)
+ * Identidad Visual UNAD - Escuela de Ciencias Básicas, Tecnología e Ingeniería (ECBTI)
+ * Colores Institucionales:
+ *   - Azul Primario UNAD: #002B49
+ *   - Azul Claro / Acento: #0083B0
+ *   - Naranja Institucional: #E87722
+ *   - Amarillo / Dorado Sol: #F4A900
+ *   - Fondos: #F8F9FA y #FFFFFF
+ */
+
+:root {
+  --unad-primary: #002B49;
+  --unad-primary-dark: #001B2E;
+  --unad-secondary: #0083B0;
+  --unad-accent-orange: #E87722;
+  --unad-accent-gold: #F4A900;
+  --unad-bg-light: #F8F9FA;
+  --unad-card-bg: #FFFFFF;
+  --unad-border: #E2E8F0;
+  --unad-border-hover: #CBD5E1;
+  --unad-text-main: #1E293B;
+  --unad-text-muted: #64748B;
+  --unad-success: #10B981;
+  --unad-success-bg: #ECFDF5;
+  --unad-warning: #F59E0B;
+  --unad-warning-bg: #FFFBEB;
+  --unad-danger: #EF4444;
+  --unad-info: #0284C7;
+  --unad-info-bg: #F0F9FF;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 43, 73, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 43, 73, 0.08);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 43, 73, 0.12);
+  --shadow-xl: 0 20px 35px -10px rgba(0, 43, 73, 0.16);
+
+  --font-sans: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Inter', Roboto, sans-serif;
+  --font-mono: 'Consolas', 'Courier New', monospace;
+  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset y caja */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--unad-text-main);
+  background-color: var(--unad-bg-light);
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--unad-bg-light);
+  color: var(--unad-text-main);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR INSTITUCIONAL (HEADER)
+   ========================================================================== */
+.unad-topbar {
+  background: linear-gradient(135deg, var(--unad-primary) 0%, var(--unad-primary-dark) 100%);
+  color: #FFFFFF;
+  border-bottom: 3px solid var(--unad-accent-orange);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+.topbar-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.brand-logo-badge {
+  width: 44px;
+  height: 44px;
+  background: radial-gradient(circle, #FFFFFF 65%, #F0F4F8 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  border: 2px solid var(--unad-accent-gold);
+  flex-shrink: 0;
+}
+
+.brand-logo-badge svg {
+  width: 28px;
+  height: 28px;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1.1;
+}
+
+.brand-title span {
+  color: var(--unad-accent-orange);
+}
+
+.brand-subtitle {
+  font-size: 0.72rem;
+  color: #D1D5DB;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Navegación Principal */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-link {
+  background: transparent;
+  border: none;
+  color: #E2E8F0;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+.nav-link.active {
+  background: var(--unad-secondary);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 131, 176, 0.4);
+}
+
+/* Header Actions & User Switcher */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-publish-header {
+  background: linear-gradient(135deg, var(--unad-accent-orange) 0%, #D86310 100%);
+  color: #FFFFFF;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 3px 10px rgba(232, 119, 34, 0.35);
+  transition: var(--transition);
+}
+
+.btn-publish-header:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(232, 119, 34, 0.45);
+}
+
+/* Switch de Usuario Activo */
+.user-switch-wrapper {
+  position: relative;
+}
+
+.user-switch-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  padding: 0.3rem 0.75rem 0.3rem 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.user-switch-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.user-avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--unad-accent-orange);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid #FFFFFF;
+}
+
+.user-btn-details {
+  text-align: left;
+  line-height: 1.2;
+}
+
+.user-btn-name {
+  font-size: 0.84rem;
+  font-weight: 700;
+  display: block;
+}
+
+.user-btn-role {
+  font-size: 0.7rem;
+  color: #F4A900;
+  display: block;
+  font-weight: 600;
+}
+
+/* Dropdown de cambio rápido de usuarios */
+.user-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 310px;
+  background: #FFFFFF;
+  color: var(--unad-text-main);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--unad-border);
+  padding: 0.75rem;
+  display: none;
+  z-index: 150;
+  animation: fadeInDown 0.18s ease-out;
+}
+
+.user-dropdown-menu.show {
+  display: block;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown-header {
+  padding: 0.4rem 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--unad-border);
+  margin-bottom: 0.5rem;
+}
+
+.user-dropdown-header h4 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--unad-text-muted);
+}
+
+.user-dropdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.user-switch-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.user-switch-item:hover {
+  background: var(--unad-bg-light);
+  border-color: var(--unad-border);
+}
+
+.user-switch-item.active-user {
+  background: var(--unad-info-bg);
+  border-color: rgba(0, 131, 176, 0.3);
+}
+
+.user-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-item-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--unad-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-item-meta {
+  font-size: 0.72rem;
+  color: var(--unad-text-muted);
+}
+
+.user-badge-level {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-oro {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+.badge-plata {
+  background: #F1F5F9;
+  color: #475569;
+}
+
+.badge-novato {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.badge-solicitante {
+  background: #EDE9FE;
+  color: #6D28D9;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--unad-border);
+  margin: 0.5rem 0;
+}
+
+.btn-open-register {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--unad-secondary);
+  background: transparent;
+  border: 1px dashed var(--unad-secondary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: var(--transition);
+}
+
+.btn-open-register:hover {
+  background: var(--unad-info-bg);
+}
+
+/* ==========================================================================
+   BANNER DE IDENTIDAD INSTITUCIONAL ECBTI
+   ========================================================================== */
+.institution-banner {
+  background: linear-gradient(90deg, #002B49 0%, #004578 60%, #0083B0 100%);
+  color: #FFFFFF;
+  padding: 1.5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.institution-banner::after {
+  content: '';
+  position: absolute;
+  right: -50px;
+  bottom: -50px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(232, 119, 34, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.banner-content {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.banner-text h1 {
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+
+.banner-text h1 span {
+  color: var(--unad-accent-gold);
+}
+
+.banner-text p {
+  font-size: 0.92rem;
+  color: #E2E8F0;
+  max-width: 680px;
+}
+
+.banner-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.banner-pill {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.banner-pill-highlight {
+  background: var(--unad-accent-orange);
+  border-color: var(--unad-accent-orange);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL Y VISTAS SPA
+   ========================================================================== */
+.app-container {
+  max-width: 1380px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 3.5rem;
+  flex: 1;
+}
+
+.view-section {
+  display: none;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.view-section.active-view {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   MÓDULO 2: FILTROS Y BUSCADOR INTELIGENTE (RF02 / RF03)
+   ========================================================================== */
+.search-filter-card {
+  background: var(--unad-card-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--unad-border);
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-primary-row {
+  display: grid;
+  grid-template-columns: 1fr 240px 200px;
+  gap: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .search-primary-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-primary-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.search-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon-inside {
+  position: absolute;
+  left: 0.9rem;
+  color: var(--unad-text-muted);
+  pointer-events: none;
+}
+
+.search-input-box input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  font-size: 0.92rem;
+  font-family: inherit;
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-md);
+  background: var(--unad-bg-light);
+  color: var(--unad-text-main);
+  transition: var(--transition);
+}
+
+.search-input-box input:focus {
+  outline: none;
+  border-color: var(--unad-secondary);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(0, 131, 176, 0.15);
+}
+
+.select-filter-box select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-md);
+  background-color: var(--unad-bg-light);
+  color: var(--unad-text-main);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.select-filter-box select:focus {
+  outline: none;
+  border-color: var(--unad-secondary);
+  box-shadow: 0 0 0 3px rgba(0, 131, 176, 0.15);
+}
+
+/* Filtros Rápidos (Chips) y Tags Activos */
+.filter-tags-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--unad-border);
+}
+
+.quick-status-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.chip-status-btn {
+  background: var(--unad-bg-light);
+  border: 1px solid var(--unad-border);
+  color: var(--unad-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.chip-status-btn:hover {
+  background: #EDF2F7;
+  color: var(--unad-text-main);
+}
+
+.chip-status-btn.active {
+  background: var(--unad-primary);
+  border-color: var(--unad-primary);
+  color: #FFFFFF;
+}
+
+.active-tag-indicator {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  background: #FEF3C7;
+  border: 1px solid #FCD34D;
+  color: #92400E;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+
+.active-tag-indicator.show {
+  display: inline-flex;
+}
+
+.btn-clear-tag {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #92400E;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* Encabezado del Muro con Contador */
+.wall-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.wall-header-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--unad-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wall-count-badge {
+  background: var(--unad-secondary);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   GRILLA DE DUDAS Y TARJETAS (CARDS)
+   ========================================================================== */
+.questions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 480px) {
+  .questions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.question-card {
+  background: var(--unad-card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--unad-border);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.question-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--unad-border-hover);
+}
+
+.question-card.resolved-card {
+  border-left: 5px solid var(--unad-success);
+}
+
+.question-card.open-card {
+  border-left: 5px solid var(--unad-accent-orange);
+}
+
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.subject-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: var(--unad-info-bg);
+  color: var(--unad-secondary);
+  border: 1px solid rgba(0, 131, 176, 0.2);
+}
+
+.status-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.status-badge.open {
+  background: var(--unad-warning-bg);
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.status-badge.resolved {
+  background: var(--unad-success-bg);
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-badge.open .status-dot {
+  background: var(--unad-accent-orange);
+}
+
+.status-badge.resolved .status-dot {
+  background: var(--unad-success);
+}
+
+.question-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--unad-primary);
+  line-height: 1.35;
+  margin-bottom: 0.55rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.question-title:hover {
+  color: var(--unad-secondary);
+}
+
+.question-snippet {
+  font-size: 0.88rem;
+  color: var(--unad-text-muted);
+  line-height: 1.45;
+  margin-bottom: 0.85rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.code-preview-snippet {
+  background: #1E293B;
+  color: #E2E8F0;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  margin-bottom: 0.75rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  border-left: 3px solid var(--unad-accent-gold);
+}
+
+/* Tags de la duda */
+.question-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.tag-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #F1F5F9;
+  color: #475569;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tag-chip:hover {
+  background: var(--unad-primary);
+  color: #FFFFFF;
+}
+
+/* Footer de la tarjeta */
+.card-author-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--unad-border);
+  gap: 0.5rem;
+}
+
+.author-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.author-avatar-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--unad-primary);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.author-text-info {
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.author-name-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--unad-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.author-sub-text {
+  font-size: 0.68rem;
+  color: var(--unad-text-muted);
+}
+
+.card-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.btn-card-action {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--unad-border);
+  background: var(--unad-bg-light);
+  color: var(--unad-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: var(--transition);
+}
+
+.btn-card-action:hover {
+  background: var(--unad-secondary);
+  border-color: var(--unad-secondary);
+  color: #FFFFFF;
+}
+
+.btn-card-chat {
+  background: #FFFFFF;
+  border: 1px solid var(--unad-accent-orange);
+  color: var(--unad-accent-orange);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transition);
+}
+
+.btn-card-chat:hover {
+  background: var(--unad-accent-orange);
+  color: #FFFFFF;
+}
+
+.btn-card-delete {
+  background: #FFFFFF;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: var(--transition);
+}
+
+.btn-card-delete:hover {
+  background: #FEF2F2;
+  border-color: #EF4444;
+  color: #991B1B;
+  transform: translateY(-1px);
+}
+
+.btn-modal-delete {
+  background: #FEF2F2;
+  border: 1px solid #FCA5A5;
+  color: #DC2626;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transition);
+}
+
+.btn-modal-delete:hover {
+  background: #FEE2E2;
+  border-color: #EF4444;
+  color: #991B1B;
+}
+
+/* Empty State del Muro */
+.empty-wall-state {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--unad-border);
+  grid-column: 1 / -1;
+}
+
+.empty-wall-icon {
+  font-size: 3rem;
+  color: var(--unad-text-muted);
+  margin-bottom: 1rem;
+}
+
+.empty-wall-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--unad-primary);
+  margin-bottom: 0.4rem;
+}
+
+.empty-wall-desc {
+  font-size: 0.9rem;
+  color: var(--unad-text-muted);
+  max-width: 450px;
+  margin: 0 auto 1.5rem;
+}
+
+/* ==========================================================================
+   MÓDULO 5: MOTOR DE GAMIFICACIÓN Y REPUTACIÓN (RF05 / RF07)
+   ========================================================================== */
+.gamification-header {
+  margin-bottom: 2rem;
+}
+
+.gamification-header h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--unad-primary);
+}
+
+.gamification-header p {
+  color: var(--unad-text-muted);
+  font-size: 0.92rem;
+}
+
+.gamification-summary-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 992px) {
+  .gamification-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjeta Perfil del Tutor Activo */
+.tutor-profile-card {
+  background: linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--unad-border);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.tutor-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.profile-avatar-large {
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-full);
+  background: var(--unad-primary);
+  color: #FFFFFF;
+  font-size: 1.7rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--unad-accent-gold);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+.profile-header-meta h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--unad-primary);
+}
+
+.profile-header-meta p {
+  font-size: 0.78rem;
+  color: var(--unad-text-muted);
+}
+
+.level-progress-box {
+  background: var(--unad-bg-light);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  border: 1px solid var(--unad-border);
+  margin-bottom: 1.25rem;
+}
+
+.level-labels-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.level-name-badge {
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.level-points-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--unad-primary);
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 10px;
+  background: #E2E8F0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--unad-secondary) 0%, var(--unad-accent-gold) 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease;
+}
+
+.stats-counter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.stat-counter-box {
+  background: #FFFFFF;
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.stat-counter-number {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--unad-primary);
+  line-height: 1.1;
+}
+
+.stat-counter-label {
+  font-size: 0.72rem;
+  color: var(--unad-text-muted);
+  font-weight: 600;
+}
+
+/* Insignias Desbloqueables */
+.badges-container-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--unad-border);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.badges-container-card h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--unad-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.85rem;
+}
+
+.badge-item-card {
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  background: var(--unad-bg-light);
+  transition: var(--transition);
+}
+
+.badge-item-card.unlocked {
+  background: #FFFFFF;
+  border-color: var(--unad-accent-gold);
+  box-shadow: 0 2px 8px rgba(244, 169, 0, 0.15);
+}
+
+.badge-item-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: #E2E8F0;
+  color: #94A3B8;
+}
+
+.badge-item-card.unlocked .badge-item-icon {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.badge-item-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--unad-text-main);
+}
+
+.badge-item-desc {
+  font-size: 0.7rem;
+  color: var(--unad-text-muted);
+  line-height: 1.3;
+}
+
+/* Tabla Leaderboard / Clasificación */
+.leaderboard-section {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--unad-border);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.leaderboard-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.leaderboard-table-wrapper {
+  overflow-x: auto;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.leaderboard-table th {
+  background: var(--unad-bg-light);
+  color: var(--unad-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--unad-border);
+}
+
+.leaderboard-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--unad-border);
+  font-size: 0.88rem;
+  vertical-align: middle;
+}
+
+.leaderboard-table tr:hover {
+  background: #F8FAFC;
+}
+
+.rank-cell {
+  font-weight: 800;
+  font-size: 1rem;
+  width: 48px;
+  text-align: center;
+}
+
+.rank-badge-podium {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.rank-1 { background: #FEF3C7; color: #B45309; border: 1px solid #FCD34D; }
+.rank-2 { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
+.rank-3 { background: #FFEDD5; color: #C2410C; border: 1px solid #FDBA74; }
+
+.tutor-table-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   MÓDULO 7: PANEL DE ANALÍTICA Y EXPORTACIÓN DE DATOS (RF08)
+   ========================================================================== */
+.analytics-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.export-btn-group {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.btn-export-unad {
+  background: #FFFFFF;
+  border: 1px solid var(--unad-border);
+  padding: 0.55rem 1.1rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  color: var(--unad-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.btn-export-unad:hover {
+  background: var(--unad-bg-light);
+  border-color: var(--unad-secondary);
+  color: var(--unad-secondary);
+}
+
+.btn-export-excel {
+  background: #107C41;
+  color: #FFFFFF;
+  border: none;
+}
+
+.btn-export-excel:hover {
+  background: #0B5B30;
+  color: #FFFFFF;
+}
+
+/* KPI Cards Grid */
+.kpi-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  border: 1px solid var(--unad-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.icon-blue { background: #E0F2FE; color: #0284C7; }
+.icon-green { background: #DCFCE7; color: #16A34A; }
+.icon-orange { background: #FFEDD5; color: #EA580C; }
+.icon-gold { background: #FEF3C7; color: #D97706; }
+
+.kpi-data {
+  min-width: 0;
+}
+
+.kpi-value {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--unad-primary);
+  line-height: 1.1;
+}
+
+.kpi-label {
+  font-size: 0.78rem;
+  color: var(--unad-text-muted);
+  font-weight: 600;
+}
+
+/* Pareto y Gráficos */
+.charts-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .charts-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--unad-border);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.chart-card-box h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--unad-primary);
+  margin-bottom: 0.35rem;
+}
+
+.chart-card-box p {
+  font-size: 0.8rem;
+  color: var(--unad-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.pareto-bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.pareto-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.pareto-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.pareto-track {
+  width: 100%;
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.pareto-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--unad-primary) 0%, var(--unad-secondary) 100%);
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   VENTANAS MODALES ACCESIBLES
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 27, 46, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.open {
+  display: flex;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--unad-border);
+}
+
+.modal-header {
+  background: var(--unad-primary);
+  color: #FFFFFF;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-close-modal {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #FFFFFF;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
+
+.btn-close-modal:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.modal-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.modal-footer {
+  padding: 0.9rem 1.25rem;
+  background: var(--unad-bg-light);
+  border-top: 1px solid var(--unad-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Formularios de Modal */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--unad-text-main);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  color: var(--unad-text-main);
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--unad-secondary);
+  box-shadow: 0 0 0 3px rgba(0, 131, 176, 0.15);
+}
+
+textarea.form-control {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.tag-input-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem;
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+}
+
+.tag-chip-editable {
+  background: #E0F2FE;
+  color: #0369A1;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-remove-tag {
+  background: transparent;
+  border: none;
+  color: #0369A1;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.tag-inner-input {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  flex: 1;
+  min-width: 120px;
+  padding: 0.2rem;
+}
+
+/* Botones Principales */
+.btn-unad-primary {
+  background: var(--unad-primary);
+  color: #FFFFFF;
+  border: none;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: var(--transition);
+}
+
+.btn-unad-primary:hover {
+  background: var(--unad-primary-dark);
+}
+
+.btn-unad-orange {
+  background: var(--unad-accent-orange);
+  color: #FFFFFF;
+  border: none;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: var(--transition);
+}
+
+.btn-unad-orange:hover {
+  background: #D86310;
+}
+
+.btn-unad-secondary {
+  background: #FFFFFF;
+  color: var(--unad-text-main);
+  border: 1px solid var(--unad-border);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-unad-secondary:hover {
+  background: var(--unad-bg-light);
+}
+
+/* ==========================================================================
+   MÓDULO 4: VISTA DETALLADA DE DUDA Y RESPUESTAS (RF04 / RF05)
+   ========================================================================== */
+.detail-question-box {
+  background: var(--unad-bg-light);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  border: 1px solid var(--unad-border);
+}
+
+.answers-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.answer-card-item {
+  background: #FFFFFF;
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+.answer-card-item.accepted-answer {
+  border: 2px solid var(--unad-success);
+  background: #F0FDF4;
+}
+
+.accepted-badge-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--unad-success);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.answer-author-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.answer-content-body {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--unad-text-main);
+  margin-bottom: 0.85rem;
+}
+
+/* Selector de Estrellas para Calificación */
+.rating-stars-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.star-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: #CBD5E1;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.star-btn.active, .star-btn:hover {
+  color: #F59E0B;
+}
+
+/* ==========================================================================
+   MÓDULO 6: CHAT MODAL SIMULADO EN TIEMPO REAL (RF06)
+   ========================================================================== */
+.chat-modal-card {
+  max-width: 620px;
+  height: 600px;
+}
+
+.chat-partner-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chat-online-indicator {
+  width: 10px;
+  height: 10px;
+  background: #10B981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #FFFFFF;
+  animation: pulseGreen 1.6s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.chat-messages-container {
+  flex: 1;
+  padding: 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  background: #F8FAFC;
+}
+
+.chat-bubble {
+  max-width: 82%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-lg);
+  font-size: 0.88rem;
+  line-height: 1.4;
+  position: relative;
+  word-break: break-word;
+}
+
+.chat-bubble.outgoing {
+  align-self: flex-end;
+  background: var(--unad-primary);
+  color: #FFFFFF;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble.incoming {
+  align-self: flex-start;
+  background: #FFFFFF;
+  color: var(--unad-text-main);
+  border: 1px solid var(--unad-border);
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chat-time-tag {
+  font-size: 0.65rem;
+  margin-top: 0.35rem;
+  display: block;
+  opacity: 0.75;
+  text-align: right;
+}
+
+/* Indicador de "Escribiendo..." */
+.typing-indicator-box {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  background: #FFFFFF;
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-full);
+  align-self: flex-start;
+  font-size: 0.75rem;
+  color: var(--unad-text-muted);
+}
+
+.typing-indicator-box.show {
+  display: inline-flex;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--unad-secondary);
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+}
+
+.chat-input-row {
+  padding: 0.85rem 1.25rem;
+  background: #FFFFFF;
+  border-top: 1px solid var(--unad-border);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.chat-text-input {
+  flex: 1;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1px solid var(--unad-border);
+  border-radius: var(--radius-full);
+  outline: none;
+}
+
+.chat-text-input:focus {
+  border-color: var(--unad-secondary);
+}
+
+.btn-send-chat {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--unad-accent-orange);
+  color: #FFFFFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.btn-send-chat:hover {
+  background: #D86310;
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   TOAST NOTIFICACIONES FLOTANTES
+   ========================================================================== */
+.toast-notifications-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  pointer-events: none;
+}
+
+.toast-item {
+  background: #1E293B;
+  color: #FFFFFF;
+  padding: 0.75rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  pointer-events: auto;
+  animation: slideInRight 0.25s ease-out;
+  border-left: 4px solid var(--unad-secondary);
+}
+
+.toast-item.success { border-left-color: var(--unad-success); }
+.toast-item.warning { border-left-color: var(--unad-warning); }
+.toast-item.gold { border-left-color: var(--unad-accent-gold); }
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ==========================================================================
+   FOOTER INSTITUCIONAL UNAD
+   ========================================================================== */
+.unad-footer {
+  background: var(--unad-primary-dark);
+  color: #94A3B8;
+  padding: 2.5rem 1.5rem 1.5rem;
+  border-top: 4px solid var(--unad-accent-orange);
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-about h4, .footer-col h4 {
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.footer-about p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.footer-col a {
+  color: #CBD5E1;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-col a:hover {
+  color: var(--unad-accent-gold);
+}
+
+.footer-bottom-bar {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES RESPONSIVAS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .topbar-container {
+    flex-wrap: wrap;
+  }
+  
+  .main-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-top: 0.4rem;
+  }
+  
+  .brand-title {
+    font-size: 1.05rem;
+  }
+  
+  .banner-text h1 {
+    font-size: 1.3rem;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+
+    <!-- ====================================================================
+         1. BARRA SUPERIOR INSTITUCIONAL (HEADER)
+         ==================================================================== -->
+    <header class="unad-topbar" role="banner">
+      <div class="topbar-container">
+        
+        <!-- Identidad Institucional UNAD ECBTI -->
+        <div class="brand-section" id="brandNavHome" role="button" tabindex="0" title="Volver al Muro de Dudas">
+          <div class="brand-logo-badge" aria-hidden="true">
+            <!-- Escudo / Sol UNAD SVG estilizado -->
+            <svg width="28" height="28" style="width:28px;height:28px;max-width:28px;max-height:28px;display:block;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="46" fill="#002B49" stroke="#E87722" stroke-width="4"/>
+              <circle cx="50" cy="50" r="28" fill="#F4A900"/>
+              <path d="M50 14L54 28H46L50 14Z" fill="#E87722"/>
+              <path d="M50 86L46 72H54L50 86Z" fill="#E87722"/>
+              <path d="M14 50L28 46V54L14 50Z" fill="#E87722"/>
+              <path d="M86 50L72 54V46L86 50Z" fill="#E87722"/>
+              <circle cx="50" cy="50" r="14" fill="#002B49"/>
+              <path d="M43 45L57 45L50 56Z" fill="#FFFFFF"/>
+            </svg>
+          </div>
+          <div class="brand-info">
+            <span class="brand-title">Tutor<span>UNAD</span></span>
+            <span class="brand-subtitle">ECBTI · Tutorías entre Pares</span>
+          </div>
+        </div>
+
+        <!-- Navegación Principal SPA -->
+        <nav class="main-nav" role="navigation" aria-label="Navegación principal">
+          <button class="nav-link active" data-view="view-wall" type="button">
+            <span>📋</span> Muro de Dudas
+          </button>
+          <button class="nav-link" data-view="view-gamification" type="button">
+            <span>🏆</span> Top Tutores & Niveles
+          </button>
+          <button class="nav-link" data-view="view-analytics" type="button">
+            <span>📊</span> Métricas de Proyecto
+          </button>
+        </nav>
+
+        <!-- Acciones: Botón Publicar y Selector de Usuario Activo -->
+        <div class="header-actions">
+          
+          <button class="btn-publish-header" id="btnOpenPublishModal" type="button" aria-label="Publicar nueva duda académica">
+            <span style="font-size: 1.1rem; line-height: 1;">+</span> Publicar Duda
+          </button>
+
+          <!-- Widget Switch de Usuario Activo (RF01) -->
+          <div class="user-switch-wrapper">
+            <button class="user-switch-btn" id="userSwitchBtn" type="button" aria-haspopup="true" aria-expanded="false" title="Cambiar usuario o alternar rol para pruebas">
+              <div class="user-avatar-circle" id="headerUserAvatar">AM</div>
+              <div class="user-btn-details">
+                <span class="user-btn-name" id="headerUserName">Ana Martínez</span>
+                <span class="user-btn-role" id="headerUserRole">Estudiante Solicitante</span>
+              </div>
+              <span style="font-size: 0.75rem; margin-left: 0.2rem; opacity: 0.7;">▼</span>
+            </button>
+
+            <!-- Menú Desplegable de Simulación Multiusuario -->
+            <div class="user-dropdown-menu" id="userDropdownMenu" role="menu">
+              <div class="user-dropdown-header">
+                <h4>Alternar Usuario de Prueba</h4>
+                <p style="font-size: 0.72rem; color: var(--unad-text-muted);">
+                  Permite comprobar la interacción bidireccional entre solicitante y tutor par en la misma pantalla.
+                </p>
+              </div>
+
+              <div class="user-dropdown-list" id="userDropdownList">
+                <!-- Se inyecta dinámicamente con JS -->
+              </div>
+
+              <div class="dropdown-divider"></div>
+
+              <button type="button" class="btn-open-register" id="btnOpenRegisterModal">
+                <span>➕</span> Iniciar Sesión / Nuevo Usuario UNAD
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         2. BANNER DE CONTEXTO INSTITUCIONAL ECBTI
+         ==================================================================== -->
+    <section class="institution-banner" aria-label="Información del proyecto institucional">
+      <div class="banner-content">
+        <div class="banner-text">
+          <h1>Comunidad de Aprendizaje Autónomo y Solidario <span>ECBTI</span></h1>
+          <p>
+            Plataforma colaborativa para la resolución sincrónica y asincrónica de dudas en Cálculo, Programación, Álgebra y Ciencias Básicas. Fortaleciendo el aprendizaje entre pares en la Universidad Nacional Abierta y a Distancia.
+          </p>
+        </div>
+        <div class="banner-badges">
+          <span class="banner-pill banner-pill-highlight">
+            <span>🎓</span> Proyecto de Grado ECBTI
+          </span>
+          <span class="banner-pill">
+            <span>⭐</span> Sistema de Reputación Gamificado
+          </span>
+          <span class="banner-pill">
+            <span>⚡</span> Tutorías en Tiempo Real
+          </span>
+          <button class="btn-publish-header" id="btnBannerPublish" style="font-size: 0.8rem; padding: 0.45rem 1rem;">
+            Resolver o Preguntar Ahora
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. CONTENEDOR PRINCIPAL Y VISTAS SPA
+         ==================================================================== -->
+    <main class="app-container" id="mainContainer">
+
+      <!-- ==================================================================
+           VISTA 1: MURO DE DUDAS Y BUSCADOR INTELIGENTE (RF02 / RF03)
+           ================================================================== -->
+      <section id="view-wall" class="view-section active-view" aria-labelledby="wallTitle">
+        
+        <!-- Tarjeta de Búsqueda y Filtros Reactivos -->
+        <div class="search-filter-card">
+          <div class="search-primary-row">
+            
+            <!-- Input Reactivo en Tiempo Real -->
+            <div class="search-input-box">
+              <span class="search-icon-inside" aria-hidden="true">🔍</span>
+              <input type="text" id="searchInput" placeholder="Buscar por tema, concepto, fórmula (#javascript, #derivadas, límites)..." aria-label="Buscar dudas por término o etiqueta">
+            </div>
+
+            <!-- Filtro por Asignatura -->
+            <div class="select-filter-box">
+              <select id="subjectFilterSelect" aria-label="Filtrar por asignatura">
+                <option value="all">Todas las Asignaturas</option>
+                <option value="Cálculo Diferencial">Cálculo Diferencial</option>
+                <option value="Fundamentos de Programación">Fundamentos de Programación</option>
+                <option value="Álgebra Lineal">Álgebra Lineal</option>
+                <option value="Pensamiento Lógico y Matemático">Pensamiento Lógico y Matemático</option>
+                <option value="Estadística Descriptiva">Estadística Descriptiva</option>
+                <option value="Bases de Datos Básico">Bases de Datos Básico</option>
+              </select>
+            </div>
+
+            <!-- Ordenamiento Dinámico -->
+            <div class="select-filter-box">
+              <select id="sortBySelect" aria-label="Ordenar dudas">
+                <option value="recent">Más recientes primero</option>
+                <option value="reputation">Mayor reputación del autor</option>
+                <option value="answers">Más comentadas</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Filtros Rápidos (Chips) e Indicador de Tag Seleccionado -->
+          <div class="filter-tags-row">
+            <div class="quick-status-filters" role="group" aria-label="Filtros rápidos por estado">
+              <button type="button" class="chip-status-btn active" data-status="all">Todas</button>
+              <button type="button" class="chip-status-btn" data-status="unanswered">Solo sin respuesta (Urgentes)</button>
+              <button type="button" class="chip-status-btn" data-status="resolved">Resueltas con solución</button>
+              <button type="button" class="chip-status-btn" data-status="my-subjects">Mis publicaciones</button>
+            </div>
+
+            <!-- Tag activo (cuando se hace clic en una etiqueta de tarjeta) -->
+            <div class="active-tag-indicator" id="activeTagIndicator">
+              <span>Etiqueta:</span>
+              <span id="activeTagName">#javascript</span>
+              <button type="button" class="btn-clear-tag" id="btnClearActiveTag" title="Quitar filtro de etiqueta">×</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra del Muro con Contador -->
+        <div class="wall-header-bar">
+          <h2 class="wall-header-title" id="wallTitle">
+            <span>Dudas Académicas Recientes</span>
+            <span class="wall-count-badge" id="wallCountBadge">0 dudas</span>
+          </h2>
+          <div style="font-size: 0.82rem; color: var(--unad-text-muted);">
+            Haz clic en <strong>Responder</strong> para orientar o en <strong>Chat</strong> para soporte sincrónico.
+          </div>
+        </div>
+
+        <!-- Grilla de Tarjetas de Dudas -->
+        <div class="questions-grid" id="questionsGrid">
+          <!-- Renderizado dinámico desde app.js -->
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================================
+           VISTA 2: MOTOR DE GAMIFICACIÓN, PERFIL Y LEADERBOARD (RF05 / RF07)
+           ================================================================== -->
+      <section id="view-gamification" class="view-section" aria-labelledby="gamifTitle">
+        
+        <div class="gamification-header">
+          <h2 id="gamifTitle">Sistema de Niveles y Gamificación de Tutores Pares</h2>
+          <p>
+            Reconocimiento a la excelencia académica y solidaridad pedagógica en la UNAD. Cada respuesta útil otorga +10 puntos y las calificaciones de 5 estrellas suman +5 puntos adicionales.
+          </p>
+        </div>
+
+        <div class="gamification-summary-grid">
+          
+          <!-- Tarjeta de Perfil del Tutor -->
+          <div class="tutor-profile-card">
+            <div class="tutor-profile-header">
+              <div class="profile-avatar-large" id="gamifProfileAvatar">JC</div>
+              <div class="profile-header-meta">
+                <h3 id="gamifProfileName">Juan Camilo Ramírez</h3>
+                <p id="gamifProfileProgram">Tutor Par · Ingeniería de Sistemas</p>
+              </div>
+            </div>
+
+            <!-- Barra de Progreso al Siguiente Nivel -->
+            <div class="level-progress-box">
+              <div class="level-labels-row">
+                <span class="level-name-badge" id="gamifLevelBadgeName">Nivel Oro</span>
+                <span class="level-points-text" id="gamifPointsText">120 pts acumulados</span>
+              </div>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="gamifProgressBarFill" style="width: 100%;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--unad-text-muted); margin-top: 0.4rem;">
+                <span>Novato (0-49 pts)</span>
+                <span>Plata (50-99 pts)</span>
+                <span>Oro (100+ pts)</span>
+              </div>
+            </div>
+
+            <!-- Contadores de Rendimiento -->
+            <div class="stats-counter-grid">
+              <div class="stat-counter-box">
+                <div class="stat-counter-number" id="gamifStatSolved">12</div>
+                <div class="stat-counter-label">Dudas Resueltas con Éxito</div>
+              </div>
+              <div class="stat-counter-box">
+                <div class="stat-counter-number" id="gamifStatRating">4.8 ★</div>
+                <div class="stat-counter-label">Promedio de Satisfacción</div>
+              </div>
+            </div>
+
+            <div style="font-size: 0.78rem; color: var(--unad-text-muted); line-height: 1.4; background: #FFFFFF; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--unad-border);">
+              💡 <strong>Regla del Semillero:</strong> Al responder con soluciones completas y código verificable, los solicitantes pueden marcar tu aporte como "Solución Aceptada" para ascender de rango.
+            </div>
+          </div>
+
+          <!-- Insignias Desbloqueables -->
+          <div class="badges-container-card">
+            <h3><span>🎖️</span> Insignias Automáticas de Mérito</h3>
+            <div class="badges-grid" id="badgesGridContainer">
+              <!-- Renderizado dinámico desde app.js -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tabla Leaderboard / Clasificación de Tutores -->
+        <div class="leaderboard-section">
+          <div class="leaderboard-title-row">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--unad-primary);">
+                Cuadro de Honor de Tutores Pares ECBTI
+              </h3>
+              <p style="font-size: 0.8rem; color: var(--unad-text-muted);">
+                Tutores destacados con mayor índice de respuestas aceptadas y mejor calificación por sus compañeros.
+              </p>
+            </div>
+            <span class="user-badge-level badge-oro">Periodo Académico Activo 2026</span>
+          </div>
+
+          <div class="leaderboard-table-wrapper">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>Puesto</th>
+                  <th>Tutor Par</th>
+                  <th>Nivel</th>
+                  <th>Puntos</th>
+                  <th>Calificación</th>
+                  <th>Soluciones</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardTbody">
+                <!-- Filas renderizadas por JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================================
+           VISTA 3: PANEL DE ANALÍTICA Y EXPORTACIÓN DE DATOS (RF08)
+           ================================================================== -->
+      <section id="view-analytics" class="view-section" aria-labelledby="analyticsTitle">
+        
+        <div class="analytics-header-row">
+          <div>
+            <h2 id="analyticsTitle" style="font-size: 1.55rem; font-weight: 800; color: var(--unad-primary);">
+              Panel de Analítica y Métricas de Investigación
+            </h2>
+            <p style="font-size: 0.88rem; color: var(--unad-text-muted); max-width: 650px;">
+              Métricas cuantitativas del proyecto de grado para el análisis de impacto pedagógico y adopción tecnológica en la UNAD.
+            </p>
+          </div>
+
+          <!-- Botones de Exportación para la Tesis -->
+          <div class="export-btn-group">
+            <button class="btn-export-unad" id="btnExportJson" type="button" title="Descargar dataset en JSON estructurado">
+              <span>💾</span> Exportar Dataset (.JSON)
+            </button>
+            <button class="btn-export-unad btn-export-excel" id="btnExportCsv" type="button" title="Descargar matriz CSV delimitada para Excel o SPSS">
+              <span>📊</span> Exportar para Excel (.CSV)
+            </button>
+          </div>
+        </div>
+
+        <!-- Tarjetas KPI -->
+        <div class="kpi-cards-grid">
+          
+          <div class="kpi-card">
+            <div class="kpi-card-icon icon-blue">📋</div>
+            <div class="kpi-data">
+              <div class="kpi-value" id="kpiTotalQuestions">0</div>
+              <div class="kpi-label">Total Dudas Publicadas</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-icon icon-green">🎯</div>
+            <div class="kpi-data">
+              <div class="kpi-value" id="kpiResolutionRate">0%</div>
+              <div class="kpi-label">Tasa de Resolución Exitosa</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-icon icon-orange">⏳</div>
+            <div class="kpi-data">
+              <div class="kpi-value" id="kpiUnanswered">0</div>
+              <div class="kpi-label">Dudas Sin Respuesta Aún</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-icon icon-gold">💬</div>
+            <div class="kpi-data">
+              <div class="kpi-value" id="kpiTotalAnswers">0</div>
+              <div class="kpi-label">Respuestas Brindadas</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Gráficos de Pareto y Distribución por Centros -->
+        <div class="charts-grid-layout">
+          
+          <div class="chart-card-box">
+            <h3>Materias Más Consultadas (Análisis Pareto)</h3>
+            <p>Distribución porcentual de necesidades de aprendizaje por curso de la ECBTI.</p>
+            <div class="pareto-bars-list" id="paretoBarsList">
+              <!-- Barras inyectadas por JS -->
+            </div>
+          </div>
+
+          <div class="chart-card-box">
+            <h3>Participación Geográfica por CEAD UNAD</h3>
+            <p>Distribución de interacción estudiantil por centros territoriales.</p>
+            <div class="pareto-bars-list" id="ceadBarsList">
+              <!-- Barras inyectadas por JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ====================================================================
+         4. VENTANAS MODALES ACCESIBLES
+         ==================================================================== -->
+
+    <!-- MODAL 1: PUBLICAR NUEVA DUDA (RF02 / RF04) -->
+    <div class="modal-overlay" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="publishModalTitle">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="publishModalTitle"><span>✍️</span> Publicar Consulta Académica</h3>
+          <button class="btn-close-modal" id="btnClosePublishModal" type="button" aria-label="Cerrar ventana">×</button>
+        </div>
+
+        <form id="publishQuestionForm">
+          <div class="modal-body">
+            
+            <div class="form-group">
+              <label class="form-label" for="publishSubject">Asignatura del Curso *</label>
+              <select class="form-control" id="publishSubject" required>
+                <option value="Cálculo Diferencial">Cálculo Diferencial</option>
+                <option value="Fundamentos de Programación">Fundamentos de Programación</option>
+                <option value="Álgebra Lineal">Álgebra Lineal</option>
+                <option value="Pensamiento Lógico y Matemático">Pensamiento Lógico y Matemático</option>
+                <option value="Estadística Descriptiva">Estadística Descriptiva</option>
+                <option value="Bases de Datos Básico">Bases de Datos Básico</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Etiquetas Temáticas (Escribe y presiona Enter o coma) *</label>
+              <div class="tag-input-container" id="publishTagsList">
+                <input type="text" class="tag-inner-input" id="publishTagInput" placeholder="Ej: javascript, derivadas, limites...">
+              </div>
+              <div style="display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 0.35rem; font-size: 0.72rem; color: var(--unad-text-muted);">
+                <span>Sugerencias rápidas:</span>
+                <button type="button" class="btn-quick-tag tag-chip" data-tag="calculo">#calculo</button>
+                <button type="button" class="btn-quick-tag tag-chip" data-tag="derivadas">#derivadas</button>
+                <button type="button" class="btn-quick-tag tag-chip" data-tag="javascript">#javascript</button>
+                <button type="button" class="btn-quick-tag tag-chip" data-tag="matrices">#matrices</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="publishTitle">Título Conciso y Descriptivo *</label>
+              <input type="text" class="form-control" id="publishTitle" placeholder="Ej: ¿Cómo aplicar la regla de la cadena en seno cuadrado?" required minlength="8">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="publishDescription">Descripción Detallada del Problema *</label>
+              <textarea class="form-control" id="publishDescription" placeholder="Explica con claridad qué has intentado, qué fórmula o concepto genera la confusión y qué paso de la guía estás desarrollando..." required minlength="15"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="publishCode">Fragmento de Código o Fórmula (Opcional)</label>
+              <textarea class="form-control" id="publishCode" style="font-family: var(--font-mono); font-size: 0.85rem;" placeholder="// Pega aquí tu código JavaScript, Python o planteamiento matemático si aplica"></textarea>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-unad-secondary" id="btnCancelPublish">Cancelar</button>
+            <button type="submit" class="btn-unad-orange">Publicar en el Muro</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- MODAL 2: DETALLE DE DUDA Y RESPUESTAS (RF04 / RF05) -->
+    <div class="modal-overlay" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+      <div class="modal-card" style="max-width: 780px;">
+        <div class="modal-header">
+          <h3 id="detailModalTitle"><span>📖</span> Consulta y Respuestas de Tutores</h3>
+          <button class="btn-close-modal" id="btnCloseDetailModal" type="button" aria-label="Cerrar detalle">×</button>
+        </div>
+
+        <div class="modal-body" style="gap: 1.5rem;">
+          
+          <!-- Contenido de la Duda -->
+          <div class="detail-question-box" id="detailQuestionContainer">
+            <!-- Renderizado por JS -->
+          </div>
+
+          <!-- Historial de Respuestas -->
+          <div>
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--unad-primary); margin-bottom: 0.85rem; display: flex; align-items: center; justify-content: space-between;">
+              <span>Respuestas Académicas</span>
+              <span class="wall-count-badge" id="detailAnswersCountBadge">0 respuestas</span>
+            </h3>
+            <div class="answers-list-section" id="detailAnswersList">
+              <!-- Renderizado por JS -->
+            </div>
+          </div>
+
+          <!-- Formulario para Agregar Nueva Respuesta -->
+          <div style="background: var(--unad-bg-light); border: 1px solid var(--unad-border); border-radius: var(--radius-md); padding: 1.25rem;">
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--unad-primary); margin-bottom: 0.6rem;">
+              <span>💡</span> Orientar al Estudiante (Aportar Solución Pedagógica)
+            </h4>
+            <form id="answerQuestionForm">
+              <div class="form-group" style="margin-bottom: 0.75rem;">
+                <label class="form-label" for="answerContent">Explicación Paso a Paso *</label>
+                <textarea class="form-control" id="answerContent" placeholder="Describe el procedimiento paso a paso con fundamentación teórica para orientar el aprendizaje autónomo..." required minlength="10"></textarea>
+              </div>
+              <div class="form-group" style="margin-bottom: 0.85rem;">
+                <label class="form-label" for="answerCode">Código o Fórmula de Demostración (Opcional)</label>
+                <textarea class="form-control" id="answerCode" style="font-family: var(--font-mono); font-size: 0.85rem; min-height: 70px;" placeholder="// Código de ejemplo o pasos matemáticos"></textarea>
+              </div>
+              <button type="submit" class="btn-unad-primary" style="width: 100%; justify-content: center;">
+                Publicar Respuesta Pedagógica
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- MODAL 3: CHAT SIMULADO ENTRE PARES EN TIEMPO REAL (RF06) -->
+    <div class="modal-overlay" id="chatModal" role="dialog" aria-modal="true" aria-labelledby="chatPartnerName">
+      <div class="modal-card chat-modal-card">
+        
+        <div class="modal-header" style="background: linear-gradient(135deg, var(--unad-primary) 0%, #004578 100%);">
+          <div class="chat-partner-bar">
+            <div class="user-avatar-circle" id="chatPartnerAvatar" style="background: var(--unad-accent-orange);">JC</div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.45rem;">
+                <h3 id="chatPartnerName" style="font-size: 1rem; margin: 0;">Juan Camilo Ramírez</h3>
+                <span class="chat-online-indicator" title="En línea"></span>
+              </div>
+              <div id="chatPartnerRole" style="font-size: 0.72rem; color: #E2E8F0;">Tutor Par · Orientación Académica</div>
+            </div>
+          </div>
+          <button class="btn-close-modal" id="btnCloseChatModal" type="button" aria-label="Cerrar chat">×</button>
+        </div>
+
+        <!-- Contenedor de Mensajes -->
+        <div class="chat-messages-container" id="chatMessagesContainer">
+          <!-- Mensajes dinámicos inyectados por app.js -->
+        </div>
+
+        <!-- Indicador de "Escribiendo..." -->
+        <div class="typing-indicator-box" id="chatTypingIndicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <span>El compañero tutor está redactando una explicación...</span>
+        </div>
+
+        <!-- Barra de Entrada de Mensaje -->
+        <form id="chatInputForm" class="chat-input-row">
+          <input type="text" class="chat-text-input" id="chatTextInput" placeholder="Escribe tu consulta o comparte un planteamiento..." autocomplete="off" required>
+          <button type="submit" class="btn-send-chat" aria-label="Enviar mensaje">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+
+    <!-- MODAL 4: REGISTRO / CAMBIO DE USUARIO UNAD (RF01) -->
+    <div class="modal-overlay" id="registerModal" role="dialog" aria-modal="true" aria-labelledby="registerModalTitle">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="registerModalTitle"><span>🆔</span> Autenticación de Usuario UNAD</h3>
+          <button class="btn-close-modal" id="btnCloseRegisterModal" type="button" aria-label="Cerrar registro">×</button>
+        </div>
+
+        <form id="registerUserForm">
+          <div class="modal-body">
+            
+            <div class="form-group">
+              <label class="form-label" for="regName">Nombre Completo del Estudiante *</label>
+              <input type="text" class="form-control" id="regName" placeholder="Ej: Santiago Mendoza" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="regEmail">Correo Electrónico Institucional UNAD *</label>
+              <input type="email" class="form-control" id="regEmail" placeholder="usuario@unad.edu.co" pattern=".+@(unad\.edu\.co|unadvirtual\.edu\.co)$" title="Debe ser una dirección válida @unad.edu.co o @unadvirtual.edu.co" required>
+              <span style="font-size: 0.72rem; color: var(--unad-text-muted);">Debe pertenecer al dominio institucional (@unad.edu.co).</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="regCead">Centro Territorial (CEAD / CCAV / UDR) *</label>
+              <select class="form-control" id="regCead" required>
+                <option value="José Acevedo y Gómez (JAG Bogotá)">CEAD José Acevedo y Gómez (JAG Bogotá)</option>
+                <option value="CEAD Medellín">CEAD Medellín</option>
+                <option value="CEAD Bucaramanga">CEAD Bucaramanga</option>
+                <option value="CEAD Cali">CEAD Cali</option>
+                <option value="CEAD Barranquilla">CEAD Barranquilla</option>
+                <option value="CEAD Palmira">CEAD Palmira</option>
+                <option value="CEAD Ibagué">CEAD Ibagué</option>
+                <option value="CEAD Pasto">CEAD Pasto</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="regProgram">Programa Académico ECBTI *</label>
+              <select class="form-control" id="regProgram" required>
+                <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+                <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
+                <option value="Ingeniería de Telecomunicaciones">Ingeniería de Telecomunicaciones</option>
+                <option value="Ingeniería de Alimentos">Ingeniería de Alimentos</option>
+                <option value="Tecnología en Desarrollo de Software">Tecnología en Desarrollo de Software</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="regRole">Rol en la Plataforma *</label>
+              <select class="form-control" id="regRole" required>
+                <option value="Estudiante Solicitante">Estudiante Solicitante (Publicar y consultar dudas)</option>
+                <option value="Tutor Par">Tutor Par (Orientar a compañeros y ganar reputación)</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-unad-secondary" id="btnCancelRegister">Cancelar</button>
+            <button type="submit" class="btn-unad-primary">Guardar e Iniciar Sesión</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- ====================================================================
+         5. CONTENEDOR DE NOTIFICACIONES FLOTANTES (TOAST)
+         ==================================================================== -->
+    <div class="toast-notifications-container" id="toastNotifications" aria-live="polite"></div>
+
+
+    <!-- ====================================================================
+         6. FOOTER INSTITUCIONAL UNAD
+         ==================================================================== -->
+    <footer class="unad-footer" role="contentinfo">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h4>TutorUNAD · Plataforma de Tutorías entre Pares</h4>
+          <p>
+            Desarrollo tecnológico para el trabajo de grado en la <strong>Escuela de Ciencias Básicas, Tecnología e Ingeniería (ECBTI)</strong>. Diseñado bajo estándares de accesibilidad W3C, arquitectura modular en JavaScript puro y principios de aprendizaje colaborativo a distancia.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Escuela ECBTI</h4>
+          <ul>
+            <li><a href="#view-wall">Cálculo Diferencial</a></li>
+            <li><a href="#view-wall">Fundamentos de Programación</a></li>
+            <li><a href="#view-wall">Álgebra Lineal</a></li>
+            <li><a href="#view-wall">Pensamiento Lógico y Matemático</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Proyecto de Grado</h4>
+          <ul>
+            <li><a href="#" id="footerLinkAnalytics">Métricas y Pareto</a></li>
+            <li><a href="#" id="footerLinkGamification">Sistema de Rangos</a></li>
+            <li><a href="#" id="footerLinkExport">Exportación de Datos Tesis</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 Universidad Nacional Abierta y a Distancia - UNAD · Institución de Educación Superior sujeta a inspección y vigilancia por el Mineducación.
+        </div>
+        <div>
+          ECBTI · Código SNIES 2102 · Colombia
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script de Lógica Vanilla ES6+ -->
+    <script src="app.js"></script>
+    <script id="embedded-unad-script">
+/**
+ * ============================================================================
+ * TUTORUNAD - Plataforma Web de Tutorías entre Estudiantes (UNAD, ECBTI)
+ * Arquitectura JavaScript ES6+ Vanilla - Motor de Negocio y Persistencia Local
+ * Cumplimiento de Requerimientos: RF01 al RF08
+ * ============================================================================
+ */
+
+(function () {
+  'use strict';
+
+  // Guardia de ejecución única para entornos locales y servidores
+  if (window.__TUTORUNAD_INITIALIZED__) {
+    return;
+  }
+  window.__TUTORUNAD_INITIALIZED__ = true;
+
+  // ==========================================================================
+  // 1. CLAVES DE PERSISTENCIA EN LOCALSTORAGE
+  // ==========================================================================
+  const STORAGE_KEYS = {
+    USERS: 'tutorunad_users',
+    CURRENT_USER: 'tutorunad_current_user',
+    QUESTIONS: 'tutorunad_questions',
+    CHATS: 'tutorunad_chats'
+  };
+
+  // ==========================================================================
+  // 2. SEMILLERO DE DATOS INICIALES (MOCK DATA OBLIGATORIO)
+  // ==========================================================================
+  const SEED_USERS = [
+    {
+      id: 'usr-ana-01',
+      name: 'Ana Martínez',
+      email: 'ana.martinez@unad.edu.co',
+      role: 'Estudiante Solicitante',
+      program: 'Ingeniería de Sistemas',
+      cead: 'José Acevedo y Gómez (JAG Bogotá)',
+      points: 25,
+      ratingAvg: 5.0,
+      ratingsCount: 2,
+      solvedCount: 1,
+      specialties: ['Fundamentos de Programación', 'Algoritmos'],
+      badges: ['Estudiante Destacado', 'Participación Activa'],
+      avatarBg: '#E87722'
+    },
+    {
+      id: 'usr-juan-02',
+      name: 'Juan Camilo Ramírez',
+      email: 'juan.ramirez@unad.edu.co',
+      role: 'Tutor Par',
+      program: 'Ingeniería de Sistemas',
+      cead: 'José Acevedo y Gómez (JAG Bogotá)',
+      points: 120,
+      ratingAvg: 4.8,
+      ratingsCount: 15,
+      solvedCount: 12,
+      specialties: ['JavaScript', 'Bases de Datos', 'Estructuras de Datos'],
+      badges: ['Top Tutor 2026', 'Especialista ECBTI', 'Respuesta Rápida', 'Mentor Solidario'],
+      avatarBg: '#002B49'
+    },
+    {
+      id: 'usr-laura-03',
+      name: 'Laura Gómez',
+      email: 'laura.gomez@unad.edu.co',
+      role: 'Tutor Par',
+      program: 'Ingeniería Industrial',
+      cead: 'Medellín',
+      points: 85,
+      ratingAvg: 4.9,
+      ratingsCount: 9,
+      solvedCount: 8,
+      specialties: ['Cálculo Diferencial', 'Álgebra Lineal', 'Estadística'],
+      badges: ['Tutor Destacado', 'Especialista ECBTI', 'Respuesta Rápida'],
+      avatarBg: '#0083B0'
+    },
+    {
+      id: 'usr-carlos-04',
+      name: 'Carlos Andrés Pérez',
+      email: 'carlos.perez@unad.edu.co',
+      role: 'Tutor Par',
+      program: 'Ingeniería Electrónica',
+      cead: 'Cali',
+      points: 40,
+      ratingAvg: 4.6,
+      ratingsCount: 4,
+      solvedCount: 3,
+      specialties: ['Pensamiento Lógico', 'Física General'],
+      badges: ['Mentor Solidario'],
+      avatarBg: '#10B981'
+    }
+  ];
+
+  const SEED_QUESTIONS = [
+    {
+      id: 'duda-001',
+      title: '¿Cómo usar filter() para filtrar lista de estudiantes aprobados?',
+      subject: 'Fundamentos de Programación',
+      description: 'Hola compañeros, estoy realizando el paso 3 de la guía de actividades. Tengo un arreglo de objetos con las notas de los estudiantes de la UNAD y necesito filtrar únicamente a los que tengan nota definitiva mayor o igual a 3.0. ¿Podrían orientarme con la sintaxis de JavaScript?',
+      codeSnippet: `const estudiantes = [
+  { nombre: "Carlos", nota: 2.8 },
+  { nombre: "María", nota: 4.5 },
+  { nombre: "Julián", nota: 3.2 }
+];
+// ¿Cómo uso filter aquí para obtener los aprobados?`,
+      tags: ['programacion', 'javascript', 'arrays'],
+      authorId: 'usr-ana-01',
+      authorName: 'Ana Martínez',
+      authorRole: 'Estudiante Solicitante',
+      authorProgram: 'Ingeniería de Sistemas',
+      authorCead: 'JAG Bogotá',
+      authorPoints: 25,
+      createdAt: Date.now() - 3600000 * 5, // Hace 5 horas
+      status: 'Resuelta',
+      answers: [
+        {
+          id: 'ans-101',
+          questionId: 'duda-001',
+          authorId: 'usr-juan-02',
+          authorName: 'Juan Camilo Ramírez',
+          authorRole: 'Tutor Par',
+          authorLevel: 'Oro',
+          authorPoints: 120,
+          content: '¡Hola Ana! En JavaScript, el método filter() itera sobre cada elemento y evalúa una condición booleana. Si devuelve true, el elemento se incluye en el nuevo arreglo sin modificar el original.',
+          codeSnippet: `const aprobados = estudiantes.filter(estudiante => estudiante.nota >= 3.0);
+console.log(aprobados);
+// Retorna a María (4.5) y Julián (3.2)`,
+          createdAt: Date.now() - 3600000 * 4,
+          isAccepted: true,
+          ratingStars: 5
+        }
+      ]
+    },
+    {
+      id: 'duda-002',
+      title: 'No entiendo la regla de la cadena en la derivada de f(x) = sin(2x²)',
+      subject: 'Cálculo Diferencial',
+      description: 'Buenas tardes grupo de estudio ECBTI. En la tarea 2 de cálculo diferencial me solicitan encontrar la derivada de f(x) = sin(2x²). Me confundo al identificar la función interna u(x) y la función externa, y no sé cómo multiplicar por la derivada interna.',
+      codeSnippet: `f(x) = sin(2x²)
+// ¿Cuál es u(x) y cómo se aplica dy/dx = (dy/du) * (du/dx)?`,
+      tags: ['calculo', 'derivadas', 'regla-cadena'],
+      authorId: 'usr-ana-01',
+      authorName: 'Ana Martínez',
+      authorRole: 'Estudiante Solicitante',
+      authorProgram: 'Ingeniería de Sistemas',
+      authorCead: 'JAG Bogotá',
+      authorPoints: 25,
+      createdAt: Date.now() - 3600000 * 2, // Hace 2 horas
+      status: 'Abierta',
+      answers: []
+    },
+    {
+      id: 'duda-003',
+      title: 'Demostración geométrica del límite sin(x)/x cuando x tiende a 0',
+      subject: 'Cálculo Diferencial',
+      description: 'Cordial saludo. Estoy preparando mi sustentación para la fase final y el tutor me preguntó sobre la justificación geométrica mediante el teorema del emparedado (o del encaje) de por qué lim(x->0) [sin(x)/x] = 1. ¿Alguien podría explicarme la relación con las áreas del círculo trigonométrico?',
+      codeSnippet: `lim (x -> 0) [ sin(x) / x ] = 1
+// Teorema del encaje: cos(x) <= sin(x)/x <= 1`,
+      tags: ['calculo', 'limites', 'trigonometria'],
+      authorId: 'usr-ana-01',
+      authorName: 'Ana Martínez',
+      authorRole: 'Estudiante Solicitante',
+      authorProgram: 'Ingeniería de Sistemas',
+      authorCead: 'JAG Bogotá',
+      authorPoints: 25,
+      createdAt: Date.now() - 3600000 * 26, // Hace 1 día
+      status: 'Resuelta',
+      answers: [
+        {
+          id: 'ans-102',
+          questionId: 'duda-003',
+          authorId: 'usr-laura-03',
+          authorName: 'Laura Gómez',
+          authorRole: 'Tutor Par',
+          authorLevel: 'Plata',
+          authorPoints: 85,
+          content: '¡Hola Ana! La demostración se basa en comparar tres áreas en el círculo unitario para un ángulo x en radianes (0 < x < π/2):\n1. Área del triángulo menor: (1/2)*sin(x)\n2. Área del sector circular: (1/2)*x\n3. Área del triángulo mayor: (1/2)*tan(x)\n\nDividiendo entre (1/2)*sin(x) obtenemos: 1 <= x/sin(x) <= 1/cos(x). Al invertir e invertir el orden: cos(x) <= sin(x)/x <= 1. Como lim cos(x) = 1 cuando x->0, por teorema del emparedado el límite central es obligatoriamente 1.',
+          codeSnippet: `Áreas: Triángulo_in <= Sector <= Triángulo_ext
+(1/2)sin(x) <= (1/2)x <= (1/2)tan(x)
+Invertir: cos(x) <= sin(x)/x <= 1
+Por Sandwich: lim(x->0) = 1`,
+          createdAt: Date.now() - 3600000 * 24,
+          isAccepted: true,
+          ratingStars: 5
+        }
+      ]
+    },
+    {
+      id: 'duda-004',
+      title: 'Multiplicación de matrices 3x3 y propiedades de la transpuesta',
+      subject: 'Álgebra Lineal',
+      description: 'Compañeros, ¿es verdad que (A * B)^T = A^T * B^T o el orden de los factores se invierte? Tengo un ejercicio práctico de la unidad 2 donde los resultados no me coinciden al aplicar la propiedad traspuesta.',
+      codeSnippet: `// Duda conceptual:
+(A * B)^T = ¿ B^T * A^T  ó  A^T * B^T ?`,
+      tags: ['algebra', 'matrices', 'propiedades'],
+      authorId: 'usr-ana-01',
+      authorName: 'Ana Martínez',
+      authorRole: 'Estudiante Solicitante',
+      authorProgram: 'Ingeniería de Sistemas',
+      authorCead: 'JAG Bogotá',
+      authorPoints: 25,
+      createdAt: Date.now() - 3600000 * 10,
+      status: 'Abierta',
+      answers: [
+        {
+          id: 'ans-103',
+          questionId: 'duda-004',
+          authorId: 'usr-juan-02',
+          authorName: 'Juan Camilo Ramírez',
+          authorRole: 'Tutor Par',
+          authorLevel: 'Oro',
+          authorPoints: 120,
+          content: '¡Atención con eso! El orden de los factores SIEMPRE se invierte en la transpuesta del producto. La propiedad formal es: (A * B)^T = B^T * A^T. Si mantienes el orden original, las dimensiones ni siquiera coincidirían salvo matrices cuadradas simétricas.',
+          codeSnippet: `// Propiedad correcta:
+(A * B)^T = B^T * A^T`,
+          createdAt: Date.now() - 3600000 * 9,
+          isAccepted: false
+        }
+      ]
+    }
+  ];
+
+  const SEED_CHATS = {
+    'chat-usr-ana-01-usr-juan-02': [
+      {
+        senderId: 'usr-ana-01',
+        senderName: 'Ana Martínez',
+        text: '¡Hola Juan Camilo! Muchas gracias por resolver mi duda de JavaScript en el muro.',
+        time: '10:30 AM',
+        timestamp: Date.now() - 3600000 * 3
+      },
+      {
+        senderId: 'usr-juan-02',
+        senderName: 'Juan Camilo Ramírez',
+        text: '¡Con todo gusto Ana! Recuerda que en la UNAD aprendemos juntos. ¿Tienes alguna otra duda con arreglos o programación funcional?',
+        time: '10:32 AM',
+        timestamp: Date.now() - 3600000 * 3 + 120000
+      }
+    ]
+  };
+
+  // ==========================================================================
+  // 3. MOTOR DE ESTADO Y PERSISTENCIA (STATE STORE)
+  // ==========================================================================
+  const State = {
+    users: [],
+    currentUser: null,
+    questions: [],
+    chats: {},
+
+    // Filtros activos en el muro
+    filters: {
+      searchTerm: '',
+      subject: 'all',
+      status: 'all',
+      selectedTag: '',
+      sortBy: 'recent'
+    },
+
+    // Estado del modal de chat activo
+    activeChat: {
+      partnerId: null,
+      partnerName: null,
+      partnerRole: null,
+      subjectContext: null
+    },
+
+    // Duda abierta en detalle
+    currentDetailQuestionId: null,
+
+    // Inicializador del almacén
+    init() {
+      // 1. Usuarios
+      const rawUsers = localStorage.getItem(STORAGE_KEYS.USERS);
+      if (!rawUsers) {
+        this.users = [...SEED_USERS];
+        this.saveUsers();
+      } else {
+        try {
+          this.users = JSON.parse(rawUsers);
+        } catch (e) {
+          this.users = [...SEED_USERS];
+        }
+      }
+
+      // 2. Usuario activo
+      const rawCurrentUser = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
+      if (!rawCurrentUser) {
+        this.currentUser = this.users[0]; // Ana Martínez por defecto
+        this.saveCurrentUser();
+      } else {
+        try {
+          const parsed = JSON.parse(rawCurrentUser);
+          // Validar que el usuario aún exista en la lista
+          const found = this.users.find(u => u.id === parsed.id);
+          this.currentUser = found || this.users[0];
+        } catch (e) {
+          this.currentUser = this.users[0];
+        }
+      }
+
+      // 3. Dudas
+      const rawQuestions = localStorage.getItem(STORAGE_KEYS.QUESTIONS);
+      if (!rawQuestions) {
+        this.questions = [...SEED_QUESTIONS];
+        this.saveQuestions();
+      } else {
+        try {
+          this.questions = JSON.parse(rawQuestions);
+        } catch (e) {
+          this.questions = [...SEED_QUESTIONS];
+        }
+      }
+
+      // 4. Chats
+      const rawChats = localStorage.getItem(STORAGE_KEYS.CHATS);
+      if (!rawChats) {
+        this.chats = { ...SEED_CHATS };
+        this.saveChats();
+      } else {
+        try {
+          this.chats = JSON.parse(rawChats);
+        } catch (e) {
+          this.chats = { ...SEED_CHATS };
+        }
+      }
+    },
+
+    saveUsers() {
+      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(this.users));
+    },
+
+    saveCurrentUser() {
+      localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(this.currentUser));
+    },
+
+    saveQuestions() {
+      localStorage.setItem(STORAGE_KEYS.QUESTIONS, JSON.stringify(this.questions));
+    },
+
+    deleteQuestion(questionId) {
+      this.questions = this.questions.filter(q => q.id !== questionId);
+      this.saveQuestions();
+    },
+
+    saveChats() {
+      localStorage.setItem(STORAGE_KEYS.CHATS, JSON.stringify(this.chats));
+    },
+
+    switchUser(userId) {
+      const user = this.users.find(u => u.id === userId);
+      if (user) {
+        this.currentUser = user;
+        this.saveCurrentUser();
+        return true;
+      }
+      return false;
+    },
+
+    getUserById(userId) {
+      return this.users.find(u => u.id === userId) || null;
+    }
+  };
+
+  // ==========================================================================
+  // 4. LÓGICA DE GAMIFICACIÓN Y REPUTACIÓN (RF05 / RF07)
+  // ==========================================================================
+  const Gamification = {
+    /**
+     * Calcula nivel, barra de progreso y umbrales
+     */
+    calculateLevel(points) {
+      const safePoints = Math.max(0, points || 0);
+      if (safePoints >= 100) {
+        return {
+          level: 'Oro',
+          badgeName: 'Tutor Nivel Oro',
+          min: 100,
+          max: Infinity,
+          nextThreshold: 100,
+          progressPct: 100,
+          color: '#F4A900',
+          badgeClass: 'badge-oro'
+        };
+      }
+      if (safePoints >= 50) {
+        const progress = Math.min(100, Math.round(((safePoints - 50) / (100 - 50)) * 100));
+        return {
+          level: 'Plata',
+          badgeName: 'Tutor Nivel Plata',
+          min: 50,
+          max: 99,
+          nextThreshold: 100,
+          progressPct: progress,
+          color: '#A0AAB2',
+          badgeClass: 'badge-plata'
+        };
+      }
+      const progress = Math.min(100, Math.round((safePoints / 50) * 100));
+      return {
+        level: 'Novato',
+        badgeName: 'Tutor Novato',
+        min: 0,
+        max: 49,
+        nextThreshold: 50,
+        progressPct: progress,
+        color: '#0083B0',
+        badgeClass: 'badge-novato'
+      };
+    },
+
+    /**
+     * Revisa e inserta insignias dinámicas según logros
+     */
+    updateBadges(user) {
+      if (!user.badges) user.badges = [];
+      const badgesSet = new Set(user.badges);
+
+      if (user.points >= 100) {
+        badgesSet.add('Top Tutor 2026');
+      }
+      if (user.solvedCount >= 5) {
+        badgesSet.add('Especialista ECBTI');
+      }
+      if (user.ratingAvg >= 4.7 && user.ratingsCount >= 3) {
+        badgesSet.add('Respuesta Rápida');
+      }
+      if (user.solvedCount >= 1) {
+        badgesSet.add('Mentor Solidario');
+      }
+
+      user.badges = Array.from(badgesSet);
+    },
+
+    /**
+     * Incrementa la reputación al aceptar respuesta y calificarla
+     */
+    awardSolution(tutorId, ratingStars) {
+      const tutor = State.getUserById(tutorId);
+      if (!tutor) return;
+
+      // +10 por respuesta útil aceptada
+      let pointsToAdd = 10;
+      // +5 extra si es calificado con 5 estrellas
+      if (ratingStars === 5) {
+        pointsToAdd += 5;
+      }
+
+      tutor.points += pointsToAdd;
+      tutor.solvedCount = (tutor.solvedCount || 0) + 1;
+
+      // Recalcular promedio de estrellas
+      const prevTotal = (tutor.ratingAvg || 5) * (tutor.ratingsCount || 0);
+      tutor.ratingsCount = (tutor.ratingsCount || 0) + 1;
+      tutor.ratingAvg = parseFloat(((prevTotal + ratingStars) / tutor.ratingsCount).toFixed(1));
+
+      // Actualizar insignias
+      this.updateBadges(tutor);
+      State.saveUsers();
+
+      // Si el tutor premiado es el usuario actual, actualizar la sesión
+      if (State.currentUser && State.currentUser.id === tutor.id) {
+        State.currentUser = tutor;
+        State.saveCurrentUser();
+      }
+    }
+  };
+
+  // ==========================================================================
+  // 5. UTILIDADES AUXILIARES (FECHAS, ESCAPE, CHIPS)
+  // ==========================================================================
+  const Utils = {
+    escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    },
+
+    formatRelativeTime(timestamp) {
+      const diffSec = Math.floor((Date.now() - timestamp) / 1000);
+      if (diffSec < 60) return 'Hace un momento';
+      const diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) return `Hace ${diffMin} min`;
+      const diffHours = Math.floor(diffMin / 60);
+      if (diffHours < 24) return `Hace ${diffHours} h`;
+      const diffDays = Math.floor(diffHours / 24);
+      if (diffDays === 1) return 'Ayer';
+      if (diffDays < 7) return `Hace ${diffDays} días`;
+      const date = new Date(timestamp);
+      return date.toLocaleDateString('es-CO', { day: '2-digit', month: 'short' });
+    },
+
+    getInitials(name) {
+      if (!name) return 'UN';
+      const parts = name.trim().split(/\s+/);
+      if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    },
+
+    showToast(message, type = 'info') {
+      const container = document.getElementById('toastNotifications');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast-item ${type}`;
+      toast.innerHTML = `
+        <span style="font-size: 1.1rem;">${type === 'success' ? '✓' : type === 'gold' ? '★' : 'ℹ'}</span>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(20px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+  };
+
+  // ==========================================================================
+  // 6. RENDERIZADORES DE LA INTERFAZ
+  // ==========================================================================
+  const UI = {
+    /**
+     * Elimina una duda académica con confirmación de usuario
+     */
+    confirmAndDeleteQuestion(questionId, questionTitle) {
+      const confirmDelete = window.confirm(
+        `¿Estás seguro de que deseas eliminar esta duda académica?\n\n"${questionTitle || 'Consulta'}"\n\nEsta acción quitará la publicación del muro de la UNAD y actualizará los registros.`
+      );
+      if (!confirmDelete) return;
+
+      State.deleteQuestion(questionId);
+
+      // Si el modal de detalle está abierto para esta duda, cerrarlo
+      if (State.currentDetailQuestionId === questionId) {
+        Modals.closeModal('detailModal');
+        State.currentDetailQuestionId = null;
+      }
+
+      this.renderQuestionsWall();
+      this.renderAnalyticsView();
+      Utils.showToast('✓ Duda académica eliminada con éxito del muro.', 'success');
+    },
+
+    /**
+     * Actualiza el widget superior del usuario activo en la barra de navegación
+     */
+    renderCurrentUserWidget() {
+      const u = State.currentUser;
+      const btn = document.getElementById('userSwitchBtn');
+      const avatarEl = document.getElementById('headerUserAvatar');
+      const nameEl = document.getElementById('headerUserName');
+      const roleEl = document.getElementById('headerUserRole');
+
+      if (!u || !btn) return;
+
+      avatarEl.textContent = Utils.getInitials(u.name);
+      avatarEl.style.backgroundColor = u.avatarBg || '#002B49';
+      nameEl.textContent = u.name;
+
+      if (u.role === 'Tutor Par') {
+        const levelInfo = Gamification.calculateLevel(u.points);
+        roleEl.textContent = `${levelInfo.badgeName} (${u.points} pts)`;
+        roleEl.style.color = '#F4A900';
+      } else {
+        roleEl.textContent = 'Estudiante Solicitante';
+        roleEl.style.color = '#D1D5DB';
+      }
+
+      this.renderUserDropdownItems();
+    },
+
+    /**
+     * Renderiza la lista del menú desplegable para cambiar de usuario
+     */
+    renderUserDropdownItems() {
+      const container = document.getElementById('userDropdownList');
+      if (!container) return;
+      container.innerHTML = '';
+
+      State.users.forEach(user => {
+        const isCurrent = State.currentUser && State.currentUser.id === user.id;
+        const levelInfo = user.role === 'Tutor Par' ? Gamification.calculateLevel(user.points) : null;
+
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = `user-switch-item ${isCurrent ? 'active-user' : ''}`;
+        item.innerHTML = `
+          <div class="user-avatar-circle" style="background-color: ${user.avatarBg || '#002B49'}">
+            ${Utils.getInitials(user.name)}
+          </div>
+          <div class="user-item-info">
+            <div class="user-item-name">
+              <span>${Utils.escapeHTML(user.name)}</span>
+              ${isCurrent ? '<span style="color: #0083B0; font-size: 0.75rem;">✓ Activo</span>' : ''}
+            </div>
+            <div class="user-item-meta">
+              ${user.role === 'Tutor Par' ? `<span class="user-badge-level ${levelInfo.badgeClass}">${levelInfo.level} - ${user.points} pts</span>` : '<span class="user-badge-level badge-solicitante">Solicitante</span>'}
+              · ${Utils.escapeHTML(user.cead)}
+            </div>
+          </div>
+        `;
+
+        item.addEventListener('click', () => {
+          State.switchUser(user.id);
+          UI.renderCurrentUserWidget();
+          UI.renderAll();
+          document.getElementById('userDropdownMenu').classList.remove('show');
+          Utils.showToast(`Has cambiado a la sesión de: ${user.name}`, 'info');
+        });
+
+        container.appendChild(item);
+      });
+    },
+
+    /**
+     * RF02 / RF03: Renderiza el Muro de Dudas aplicando filtros y ordenamiento
+     */
+    renderQuestionsWall() {
+      const grid = document.getElementById('questionsGrid');
+      const countBadge = document.getElementById('wallCountBadge');
+      const activeTagIndicator = document.getElementById('activeTagIndicator');
+      const activeTagName = document.getElementById('activeTagName');
+
+      if (!grid) return;
+
+      // Actualizar tag activo en la barra de filtros
+      if (State.filters.selectedTag) {
+        activeTagIndicator.classList.add('show');
+        activeTagName.textContent = `#${State.filters.selectedTag}`;
+      } else {
+        activeTagIndicator.classList.remove('show');
+      }
+
+      // Algoritmo de filtrado reactivo
+      const term = (State.filters.searchTerm || '').trim().toLowerCase();
+      const subject = State.filters.subject;
+      const status = State.filters.status;
+      const tag = (State.filters.selectedTag || '').trim().toLowerCase();
+
+      let list = State.questions.filter(q => {
+        // Término de búsqueda
+        if (term) {
+          const mTitle = q.title.toLowerCase().includes(term);
+          const mDesc = q.description.toLowerCase().includes(term);
+          const mAuthor = q.authorName.toLowerCase().includes(term);
+          const mSubject = q.subject.toLowerCase().includes(term);
+          const mTags = q.tags.some(t => t.toLowerCase().includes(term));
+          if (!mTitle && !mDesc && !mAuthor && !mSubject && !mTags) return false;
+        }
+
+        // Materia
+        if (subject !== 'all' && q.subject.toLowerCase() !== subject.toLowerCase()) {
+          return false;
+        }
+
+        // Tag temático
+        if (tag && !q.tags.some(t => t.toLowerCase() === tag)) {
+          return false;
+        }
+
+        // Estado
+        if (status === 'unanswered' && q.answers.length > 0) return false;
+        if (status === 'resolved' && q.status !== 'Resuelta') return false;
+        if (status === 'my-subjects') {
+          // Dudas publicadas por el usuario actual o que correspondan a su programa/materias
+          if (q.authorId !== State.currentUser.id) return false;
+        }
+
+        return true;
+      });
+
+      // Ordenamiento dinámico
+      list.sort((a, b) => {
+        if (State.filters.sortBy === 'reputation') {
+          return (b.authorPoints || 0) - (a.authorPoints || 0);
+        }
+        if (State.filters.sortBy === 'answers') {
+          return b.answers.length - a.answers.length;
+        }
+        return b.createdAt - a.createdAt; // recent por defecto
+      });
+
+      if (countBadge) countBadge.textContent = `${list.length} ${list.length === 1 ? 'duda' : 'dudas'}`;
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-wall-state">
+            <div class="empty-wall-icon">🔍</div>
+            <div class="empty-wall-title">No se encontraron dudas con estos criterios</div>
+            <div class="empty-wall-desc">Intenta cambiando el término de búsqueda o limpiando los filtros seleccionados para ver más publicaciones académicas de la ECBTI.</div>
+            <button class="btn-unad-orange" id="btnResetFilters">Limpiar Todos los Filtros</button>
+          </div>
+        `;
+        const resetBtn = document.getElementById('btnResetFilters');
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            State.filters.searchTerm = '';
+            State.filters.subject = 'all';
+            State.filters.status = 'all';
+            State.filters.selectedTag = '';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('subjectFilterSelect').value = 'all';
+            document.querySelectorAll('.chip-status-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.chip-status-btn[data-status="all"]')?.classList.add('active');
+            UI.renderQuestionsWall();
+          });
+        }
+        return;
+      }
+
+      grid.innerHTML = '';
+      list.forEach(q => {
+        const isResolved = q.status === 'Resuelta';
+        const card = document.createElement('article');
+        card.className = `question-card ${isResolved ? 'resolved-card' : 'open-card'}`;
+
+        const tagsHtml = q.tags.map(t => `<span class="tag-chip" data-tag="${Utils.escapeHTML(t)}">#${Utils.escapeHTML(t)}</span>`).join('');
+        const codeHtml = q.codeSnippet ? `<pre class="code-preview-snippet"><code>${Utils.escapeHTML(q.codeSnippet)}</code></pre>` : '';
+
+        card.innerHTML = `
+          <div>
+            <div class="card-top-row">
+              <span class="subject-badge">${Utils.escapeHTML(q.subject)}</span>
+              <span class="status-badge ${isResolved ? 'resolved' : 'open'}">
+                <span class="status-dot"></span>
+                ${isResolved ? 'Resuelta' : 'Abierta'}
+              </span>
+            </div>
+
+            <h3 class="question-title" data-qid="${q.id}">${Utils.escapeHTML(q.title)}</h3>
+            <p class="question-snippet">${Utils.escapeHTML(q.description)}</p>
+            ${codeHtml}
+            <div class="question-tags-container">${tagsHtml}</div>
+          </div>
+
+          <div>
+            <div class="card-author-row">
+              <div class="author-meta">
+                <div class="author-avatar-sm">${Utils.getInitials(q.authorName)}</div>
+                <div class="author-text-info">
+                  <div class="author-name-text">${Utils.escapeHTML(q.authorName)}</div>
+                  <div class="author-sub-text">${Utils.escapeHTML(q.authorProgram)} · ${Utils.escapeHTML(q.authorCead)}</div>
+                </div>
+              </div>
+              <div style="font-size: 0.72rem; color: var(--unad-text-muted); text-align: right;">
+                ${Utils.formatRelativeTime(q.createdAt)}
+              </div>
+            </div>
+
+            <div class="card-actions-row">
+              <button class="btn-card-action" data-action="view-detail" data-qid="${q.id}">
+                💬 Ver Respuestas (${q.answers.length})
+              </button>
+              <button class="btn-card-chat" data-action="open-chat" data-authorid="${q.authorId}" data-authorname="${Utils.escapeHTML(q.authorName)}" data-authorsubject="${Utils.escapeHTML(q.subject)}" title="Abrir chat directo con el estudiante o tutor">
+                ✉ Chat
+              </button>
+              <button class="btn-card-delete" data-action="delete-card-question" data-qid="${q.id}" title="Eliminar esta duda académica">
+                🗑️ Eliminar
+              </button>
+            </div>
+          </div>
+        `;
+
+        // Eventos en tags para filtrar
+        card.querySelectorAll('.tag-chip').forEach(chip => {
+          chip.addEventListener('click', (e) => {
+            e.stopPropagation();
+            State.filters.selectedTag = chip.getAttribute('data-tag');
+            UI.renderQuestionsWall();
+          });
+        });
+
+        // Evento ver detalle
+        card.querySelector('.question-title').addEventListener('click', () => {
+          Modals.openDetailModal(q.id);
+        });
+
+        card.querySelector('[data-action="view-detail"]').addEventListener('click', () => {
+          Modals.openDetailModal(q.id);
+        });
+
+        // Evento abrir chat
+        card.querySelector('[data-action="open-chat"]').addEventListener('click', () => {
+          Modals.openChatModal(q.authorId, q.authorName, 'Estudiante', q.subject);
+        });
+
+        // Evento eliminar duda
+        card.querySelector('[data-action="delete-card-question"]')?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          UI.confirmAndDeleteQuestion(q.id, q.title);
+        });
+
+        grid.appendChild(card);
+      });
+    },
+
+    /**
+     * RF05 / RF07: Renderiza la sección de Gamificación y Perfil de Tutor
+     */
+    renderGamificationView() {
+      const currentUser = State.currentUser;
+      const isTutor = currentUser.role === 'Tutor Par';
+
+      // 1. Perfil del tutor actual o del tutor destacado
+      const tutorDisplay = isTutor ? currentUser : (State.users.find(u => u.role === 'Tutor Par') || currentUser);
+      const levelInfo = Gamification.calculateLevel(tutorDisplay.points);
+
+      const avatarEl = document.getElementById('gamifProfileAvatar');
+      const nameEl = document.getElementById('gamifProfileName');
+      const programEl = document.getElementById('gamifProfileProgram');
+      const badgeNameEl = document.getElementById('gamifLevelBadgeName');
+      const pointsTextEl = document.getElementById('gamifPointsText');
+      const progressFill = document.getElementById('gamifProgressBarFill');
+      const statSolvedEl = document.getElementById('gamifStatSolved');
+      const statRatingEl = document.getElementById('gamifStatRating');
+
+      if (avatarEl) {
+        avatarEl.textContent = Utils.getInitials(tutorDisplay.name);
+        avatarEl.style.backgroundColor = tutorDisplay.avatarBg || '#002B49';
+      }
+      if (nameEl) nameEl.textContent = tutorDisplay.name;
+      if (programEl) programEl.textContent = `${tutorDisplay.role} · ${tutorDisplay.program} (${tutorDisplay.cead})`;
+      if (badgeNameEl) {
+        badgeNameEl.textContent = `Nivel ${levelInfo.level}`;
+        badgeNameEl.style.color = levelInfo.color;
+      }
+      if (pointsTextEl) {
+        pointsTextEl.textContent = `${tutorDisplay.points} pts acumulados`;
+      }
+      if (progressFill) {
+        progressFill.style.width = `${levelInfo.progressPct}%`;
+      }
+      if (statSolvedEl) statSolvedEl.textContent = tutorDisplay.solvedCount || 0;
+      if (statRatingEl) statRatingEl.textContent = `${tutorDisplay.ratingAvg || '5.0'} ★`;
+
+      // 2. Insignias desbloqueables
+      const badgesContainer = document.getElementById('badgesGridContainer');
+      if (badgesContainer) {
+        const ALL_BADGES = [
+          { name: 'Top Tutor 2026', icon: '🏆', desc: 'Alcanzar el Nivel Oro con más de 100 puntos de reputación en la plataforma.' },
+          { name: 'Especialista ECBTI', icon: '⭐', desc: 'Resolver con éxito 5 o más dudas con solución aceptada por compañeros.' },
+          { name: 'Respuesta Rápida', icon: '⚡', desc: 'Mantener un promedio de satisfacción pedagógica superior a 4.7 estrellas.' },
+          { name: 'Mentor Solidario', icon: '🤝', desc: 'Participar activamente brindando orientación académica a estudiantes nuevos.' }
+        ];
+
+        badgesContainer.innerHTML = ALL_BADGES.map(b => {
+          const isUnlocked = tutorDisplay.badges && tutorDisplay.badges.includes(b.name);
+          return `
+            <div class="badge-item-card ${isUnlocked ? 'unlocked' : ''}">
+              <div class="badge-item-icon">${b.icon}</div>
+              <div class="badge-item-name">${b.name}</div>
+              <div class="badge-item-desc">${b.desc}</div>
+              <span style="font-size: 0.68rem; font-weight: 700; color: ${isUnlocked ? '#16A34A' : '#94A3B8'};">
+                ${isUnlocked ? '✓ Desbloqueada' : '🔒 Bloqueada'}
+              </span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 3. Tabla Leaderboard
+      const leaderboardTbody = document.getElementById('leaderboardTbody');
+      if (leaderboardTbody) {
+        const tutors = State.users.filter(u => u.role === 'Tutor Par');
+        tutors.sort((a, b) => b.points - a.points);
+
+        leaderboardTbody.innerHTML = '';
+        tutors.forEach((tutor, idx) => {
+          const lvl = Gamification.calculateLevel(tutor.points);
+          const tr = document.createElement('tr');
+
+          let rankBadge = `${idx + 1}`;
+          if (idx === 0) rankBadge = `<span class="rank-badge-podium rank-1">🥇 1</span>`;
+          else if (idx === 1) rankBadge = `<span class="rank-badge-podium rank-2">🥈 2</span>`;
+          else if (idx === 2) rankBadge = `<span class="rank-badge-podium rank-3">🥉 3</span>`;
+
+          tr.innerHTML = `
+            <td class="rank-cell">${rankBadge}</td>
+            <td>
+              <div class="tutor-table-info">
+                <div class="author-avatar-sm" style="background-color: ${tutor.avatarBg || '#002B49'}">
+                  ${Utils.getInitials(tutor.name)}
+                </div>
+                <div>
+                  <div style="font-weight: 700; color: var(--unad-primary);">${Utils.escapeHTML(tutor.name)}</div>
+                  <div style="font-size: 0.72rem; color: var(--unad-text-muted);">${Utils.escapeHTML(tutor.program)} · ${Utils.escapeHTML(tutor.cead)}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="user-badge-level ${lvl.badgeClass}">${lvl.level}</span>
+            </td>
+            <td>
+              <span style="font-weight: 800; color: var(--unad-primary);">${tutor.points}</span> pts
+            </td>
+            <td>
+              <span style="color: #F59E0B; font-weight: 700;">★ ${tutor.ratingAvg || '5.0'}</span>
+              <span style="font-size: 0.72rem; color: var(--unad-text-muted);">(${tutor.ratingsCount || 0})</span>
+            </td>
+            <td>
+              <span style="font-weight: 700; color: #10B981;">${tutor.solvedCount || 0}</span> resueltas
+            </td>
+            <td>
+              <button class="btn-card-chat" data-action="chat-tutor" data-tutorid="${tutor.id}" data-tutorname="${Utils.escapeHTML(tutor.name)}" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">
+                ✉ Solicitar Tutoría
+              </button>
+            </td>
+          `;
+
+          tr.querySelector('[data-action="chat-tutor"]').addEventListener('click', () => {
+            Modals.openChatModal(tutor.id, tutor.name, 'Tutor Par', 'Tutoría Académica Personalizada');
+          });
+
+          leaderboardTbody.appendChild(tr);
+        });
+      }
+    },
+
+    /**
+     * RF08: Renderiza el Panel de Analítica y Estadísticas del Proyecto de Grado
+     */
+    renderAnalyticsView() {
+      const totalQuestions = State.questions.length;
+      const resolvedQuestions = State.questions.filter(q => q.status === 'Resuelta').length;
+      const unansweredQuestions = State.questions.filter(q => q.answers.length === 0).length;
+      const totalAnswers = State.questions.reduce((acc, q) => acc + q.answers.length, 0);
+      const resolutionRatePct = totalQuestions > 0 ? Math.round((resolvedQuestions / totalQuestions) * 100) : 0;
+
+      // KPI Elements
+      const elTotal = document.getElementById('kpiTotalQuestions');
+      const elRate = document.getElementById('kpiResolutionRate');
+      const elUnanswered = document.getElementById('kpiUnanswered');
+      const elAnswers = document.getElementById('kpiTotalAnswers');
+      const elTopTutor = document.getElementById('kpiTopTutor');
+
+      if (elTotal) elTotal.textContent = totalQuestions;
+      if (elRate) elRate.textContent = `${resolutionRatePct}%`;
+      if (elUnanswered) elUnanswered.textContent = unansweredQuestions;
+      if (elAnswers) elAnswers.textContent = totalAnswers;
+
+      // Tutor con mayor reputación
+      const tutors = State.users.filter(u => u.role === 'Tutor Par').sort((a, b) => b.points - a.points);
+      const topTutor = tutors[0];
+      if (elTopTutor && topTutor) {
+        elTopTutor.textContent = `${topTutor.name} (${topTutor.points} pts)`;
+      }
+
+      // Pareto de Materias más consultadas
+      const paretoContainer = document.getElementById('paretoBarsList');
+      if (paretoContainer) {
+        const countsBySubject = {};
+        State.questions.forEach(q => {
+          countsBySubject[q.subject] = (countsBySubject[q.subject] || 0) + 1;
+        });
+
+        const sortedSubjects = Object.entries(countsBySubject)
+          .map(([subject, count]) => ({
+            subject,
+            count,
+            pct: totalQuestions > 0 ? Math.round((count / totalQuestions) * 100) : 0
+          }))
+          .sort((a, b) => b.count - a.count);
+
+        paretoContainer.innerHTML = sortedSubjects.map(item => `
+          <div class="pareto-bar-item">
+            <div class="pareto-label-row">
+              <span style="color: var(--unad-primary);">${Utils.escapeHTML(item.subject)}</span>
+              <span><strong>${item.count}</strong> dudas (${item.pct}%)</span>
+            </div>
+            <div class="pareto-track">
+              <div class="pareto-fill" style="width: ${item.pct}%;"></div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Distribución por CEADs
+      const ceadContainer = document.getElementById('ceadBarsList');
+      if (ceadContainer) {
+        const countsByCead = {};
+        State.questions.forEach(q => {
+          const cead = q.authorCead || 'JAG Bogotá';
+          countsByCead[cead] = (countsByCead[cead] || 0) + 1;
+        });
+
+        const sortedCeads = Object.entries(countsByCead)
+          .map(([cead, count]) => ({
+            cead,
+            count,
+            pct: totalQuestions > 0 ? Math.round((count / totalQuestions) * 100) : 0
+          }))
+          .sort((a, b) => b.count - a.count);
+
+        ceadContainer.innerHTML = sortedCeads.map(item => `
+          <div class="pareto-bar-item">
+            <div class="pareto-label-row">
+              <span style="color: var(--unad-primary);">${Utils.escapeHTML(item.cead)}</span>
+              <span><strong>${item.count}</strong> registros (${item.pct}%)</span>
+            </div>
+            <div class="pareto-track">
+              <div class="pareto-fill" style="width: ${item.pct}%; background: linear-gradient(90deg, #E87722 0%, #F4A900 100%);"></div>
+            </div>
+          </div>
+        `).join('');
+      }
+    },
+
+    renderAll() {
+      this.renderQuestionsWall();
+      this.renderGamificationView();
+      this.renderAnalyticsView();
+    }
+  };
+
+  // ==========================================================================
+  // 7. GESTIÓN DE VENTANAS MODALES
+  // ==========================================================================
+  const Modals = {
+    // Listado de tags temporales para nueva publicación
+    currentNewTags: ['programacion'],
+
+    init() {
+      this.bindPublishModal();
+      this.bindDetailModal();
+      this.bindChatModal();
+      this.bindRegisterModal();
+    },
+
+    openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) modal.classList.add('open');
+    },
+
+    closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) modal.classList.remove('open');
+    },
+
+    // ------------------------------------------------------------------------
+    // Modal 1: Publicar Duda (RF02 / RF04)
+    // ------------------------------------------------------------------------
+    bindPublishModal() {
+      const modal = document.getElementById('publishModal');
+      const openBtn = document.getElementById('btnOpenPublishModal');
+      const closeBtn = document.getElementById('btnClosePublishModal');
+      const cancelBtn = document.getElementById('btnCancelPublish');
+      const form = document.getElementById('publishQuestionForm');
+      const tagInput = document.getElementById('publishTagInput');
+      const tagsContainer = document.getElementById('publishTagsList');
+
+      if (openBtn) openBtn.addEventListener('click', () => {
+        this.currentNewTags = ['duda-unad'];
+        this.renderPublishTagChips();
+        this.openModal('publishModal');
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', () => this.closeModal('publishModal'));
+      if (cancelBtn) cancelBtn.addEventListener('click', () => this.closeModal('publishModal'));
+
+      // Manejo de chips interactivos de tags
+      if (tagInput) {
+        tagInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ',') {
+            e.preventDefault();
+            const val = tagInput.value.trim().toLowerCase().replace(/^#+/, '');
+            if (val && !this.currentNewTags.includes(val)) {
+              this.currentNewTags.push(val);
+              this.renderPublishTagChips();
+            }
+            tagInput.value = '';
+          }
+        });
+      }
+
+      // Sugerencias rápidas de tags
+      document.querySelectorAll('.btn-quick-tag').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.getAttribute('data-tag');
+          if (t && !this.currentNewTags.includes(t)) {
+            this.currentNewTags.push(t);
+            this.renderPublishTagChips();
+          }
+        });
+      });
+
+      // Envío del formulario de publicación
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const subject = document.getElementById('publishSubject').value;
+          const title = document.getElementById('publishTitle').value.trim();
+          const description = document.getElementById('publishDescription').value.trim();
+          const codeSnippet = document.getElementById('publishCode').value.trim();
+
+          if (!title || title.length < 8) {
+            Utils.showToast('El título debe tener al menos 8 caracteres explicativos.', 'warning');
+            return;
+          }
+          if (!description || description.length < 15) {
+            Utils.showToast('La descripción debe detallar tu consulta con al menos 15 caracteres.', 'warning');
+            return;
+          }
+
+          const newQuestion = {
+            id: `duda-${Date.now()}`,
+            title,
+            subject,
+            description,
+            codeSnippet: codeSnippet || null,
+            tags: this.currentNewTags.length > 0 ? [...this.currentNewTags] : ['consulta'],
+            authorId: State.currentUser.id,
+            authorName: State.currentUser.name,
+            authorRole: State.currentUser.role,
+            authorProgram: State.currentUser.program,
+            authorCead: State.currentUser.cead,
+            authorPoints: State.currentUser.points,
+            createdAt: Date.now(),
+            status: 'Abierta',
+            answers: []
+          };
+
+          State.questions.unshift(newQuestion);
+          State.saveQuestions();
+
+          form.reset();
+          this.currentNewTags = [];
+          this.closeModal('publishModal');
+          UI.renderQuestionsWall();
+          UI.renderAnalyticsView();
+
+          Utils.showToast('¡Tu duda ha sido publicada con éxito en el muro UNAD!', 'success');
+        });
+      }
+    },
+
+    renderPublishTagChips() {
+      const container = document.getElementById('publishTagsList');
+      const input = document.getElementById('publishTagInput');
+      if (!container || !input) return;
+
+      container.querySelectorAll('.tag-chip-editable').forEach(el => el.remove());
+
+      this.currentNewTags.forEach(t => {
+        const chip = document.createElement('span');
+        chip.className = 'tag-chip-editable';
+        chip.innerHTML = `#${Utils.escapeHTML(t)} <button type="button" class="btn-remove-tag" data-tag="${t}">×</button>`;
+
+        chip.querySelector('.btn-remove-tag').addEventListener('click', () => {
+          this.currentNewTags = this.currentNewTags.filter(item => item !== t);
+          this.renderPublishTagChips();
+        });
+
+        container.insertBefore(chip, input);
+      });
+    },
+
+    // ------------------------------------------------------------------------
+    // Modal 2: Detalle de Duda, Respuestas y Calificación (RF04 / RF05)
+    // ------------------------------------------------------------------------
+    bindDetailModal() {
+      const closeBtn = document.getElementById('btnCloseDetailModal');
+      const form = document.getElementById('answerQuestionForm');
+
+      if (closeBtn) closeBtn.addEventListener('click', () => this.closeModal('detailModal'));
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const qId = State.currentDetailQuestionId;
+          const q = State.questions.find(item => item.id === qId);
+          if (!q) return;
+
+          const content = document.getElementById('answerContent').value.trim();
+          const codeSnippet = document.getElementById('answerCode').value.trim();
+
+          if (!content || content.length < 10) {
+            Utils.showToast('Por favor escribe una explicación pedagógica clara (mínimo 10 caracteres).', 'warning');
+            return;
+          }
+
+          const userLevel = State.currentUser.role === 'Tutor Par' ? Gamification.calculateLevel(State.currentUser.points).level : 'Estudiante';
+
+          const newAnswer = {
+            id: `ans-${Date.now()}`,
+            questionId: q.id,
+            authorId: State.currentUser.id,
+            authorName: State.currentUser.name,
+            authorRole: State.currentUser.role,
+            authorLevel: userLevel,
+            authorPoints: State.currentUser.points,
+            content,
+            codeSnippet: codeSnippet || null,
+            createdAt: Date.now(),
+            isAccepted: false
+          };
+
+          q.answers.push(newAnswer);
+          State.saveQuestions();
+
+          form.reset();
+          this.renderDetailModalContent(q.id);
+          UI.renderQuestionsWall();
+          UI.renderAnalyticsView();
+
+          Utils.showToast('¡Respuesta publicada con éxito! Gracias por tu colaboración pedagógica.', 'success');
+        });
+      }
+    },
+
+    openDetailModal(questionId) {
+      State.currentDetailQuestionId = questionId;
+      this.renderDetailModalContent(questionId);
+      this.openModal('detailModal');
+    },
+
+    renderDetailModalContent(questionId) {
+      const q = State.questions.find(item => item.id === questionId);
+      const container = document.getElementById('detailQuestionContainer');
+      const answersList = document.getElementById('detailAnswersList');
+      const answersCountBadge = document.getElementById('detailAnswersCountBadge');
+
+      if (!q || !container || !answersList) return;
+
+      const isResolved = q.status === 'Resuelta';
+      const isAuthor = State.currentUser && State.currentUser.id === q.authorId;
+
+      // Renderizar datos de la duda
+      const codeHtml = q.codeSnippet ? `<pre class="code-preview-snippet"><code>${Utils.escapeHTML(q.codeSnippet)}</code></pre>` : '';
+      const tagsHtml = q.tags.map(t => `<span class="tag-chip">#${Utils.escapeHTML(t)}</span>`).join('');
+
+      container.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="subject-badge">${Utils.escapeHTML(q.subject)}</span>
+            <span class="status-badge ${isResolved ? 'resolved' : 'open'}">
+              <span class="status-dot"></span>
+              ${isResolved ? 'Duda Resuelta' : 'Pendiente de Respuesta'}
+            </span>
+          </div>
+          <button type="button" class="btn-modal-delete" data-action="delete-modal-question" title="Eliminar esta consulta del muro">
+            🗑️ Eliminar Duda
+          </button>
+        </div>
+
+        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--unad-primary); margin-bottom: 0.6rem;">
+          ${Utils.escapeHTML(q.title)}
+        </h2>
+
+        <p style="font-size: 0.94rem; line-height: 1.5; color: var(--unad-text-main); margin-bottom: 0.85rem;">
+          ${Utils.escapeHTML(q.description)}
+        </p>
+        ${codeHtml}
+
+        <div class="question-tags-container" style="margin-bottom: 0.75rem;">${tagsHtml}</div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.6rem; border-top: 1px solid var(--unad-border); font-size: 0.78rem; color: var(--unad-text-muted);">
+          <span>Por: <strong>${Utils.escapeHTML(q.authorName)}</strong> (${Utils.escapeHTML(q.authorProgram)})</span>
+          <span>${Utils.formatRelativeTime(q.createdAt)}</span>
+        </div>
+      `;
+
+      // Evento eliminar duda desde el modal de detalle
+      container.querySelector('[data-action="delete-modal-question"]')?.addEventListener('click', () => {
+        UI.confirmAndDeleteQuestion(q.id, q.title);
+      });
+
+      if (answersCountBadge) {
+        answersCountBadge.textContent = `${q.answers.length} ${q.answers.length === 1 ? 'respuesta' : 'respuestas'}`;
+      }
+
+      // Renderizar lista de respuestas
+      if (q.answers.length === 0) {
+        answersList.innerHTML = `
+          <div style="text-align: center; padding: 2rem 1rem; background: var(--unad-bg-light); border-radius: var(--radius-md); border: 1px dashed var(--unad-border);">
+            <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">💡</div>
+            <div style="font-weight: 700; color: var(--unad-primary);">Esta duda aún no tiene respuestas</div>
+            <div style="font-size: 0.82rem; color: var(--unad-text-muted);">¡Sé el primer tutor o compañero en orientar a este estudiante!</div>
+          </div>
+        `;
+        return;
+      }
+
+      answersList.innerHTML = '';
+      q.answers.forEach(ans => {
+        const item = document.createElement('div');
+        item.className = `answer-card-item ${ans.isAccepted ? 'accepted-answer' : ''}`;
+
+        const codeSnippetHtml = ans.codeSnippet ? `<pre class="code-preview-snippet"><code>${Utils.escapeHTML(ans.codeSnippet)}</code></pre>` : '';
+        const levelBadgeClass = ans.authorLevel === 'Oro' ? 'badge-oro' : ans.authorLevel === 'Plata' ? 'badge-plata' : 'badge-novato';
+
+        let ratingBlock = '';
+        if (ans.isAccepted) {
+          const starsCount = ans.ratingStars || 5;
+          const starsVisual = '★'.repeat(starsCount) + '☆'.repeat(5 - starsCount);
+          ratingBlock = `
+            <div style="margin-top: 0.6rem; font-size: 0.82rem; color: #D97706; font-weight: 700; display: flex; align-items: center; gap: 0.4rem;">
+              <span>${starsVisual}</span>
+              <span>(Calificación otorgada por el solicitante: ${starsCount}/5)</span>
+            </div>
+          `;
+        }
+
+        let acceptButtonBlock = '';
+        // Si el usuario actual es el autor de la duda y la duda está abierta (o la respuesta no está aceptada)
+        if (isAuthor && !ans.isAccepted) {
+          acceptButtonBlock = `
+            <div style="margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--unad-border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+              <span style="font-size: 0.78rem; color: var(--unad-text-muted);">¿Esta respuesta resolvió tu duda?</span>
+              <button class="btn-unad-orange" data-action="accept-solution" data-ansid="${ans.id}" style="padding: 0.4rem 0.85rem; font-size: 0.78rem;">
+                ✓ Marcar como Respuesta Útil y Calificar
+              </button>
+            </div>
+          `;
+        }
+
+        item.innerHTML = `
+          ${ans.isAccepted ? '<div class="accepted-badge-ribbon">✓ Solución Aceptada por el Solicitante (+15 pts)</div>' : ''}
+          <div class="answer-author-header">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <div class="author-avatar-sm" style="background-color: var(--unad-secondary);">
+                ${Utils.getInitials(ans.authorName)}
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: var(--unad-primary);">
+                  ${Utils.escapeHTML(ans.authorName)}
+                  <span class="user-badge-level ${levelBadgeClass}" style="margin-left: 0.35rem;">
+                    ${Utils.escapeHTML(ans.authorRole)} (${ans.authorLevel})
+                  </span>
+                </div>
+                <div style="font-size: 0.7rem; color: var(--unad-text-muted);">
+                  ${Utils.formatRelativeTime(ans.createdAt)}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="answer-content-body">${Utils.escapeHTML(ans.content)}</div>
+          ${codeSnippetHtml}
+          ${ratingBlock}
+          ${acceptButtonBlock}
+        `;
+
+        // Evento Aceptar Solución y Calificar
+        const acceptBtn = item.querySelector('[data-action="accept-solution"]');
+        if (acceptBtn) {
+          acceptBtn.addEventListener('click', () => {
+            this.promptRatingAndAcceptSolution(q, ans);
+          });
+        }
+
+        answersList.appendChild(item);
+      });
+    },
+
+    /**
+     * RF05: Flujo de Aceptación de Solución con Calificación de 5 Estrellas
+     */
+    promptRatingAndAcceptSolution(question, answer) {
+      // Calificación interactiva con 5 estrellas por defecto
+      let chosenStars = 5;
+      const confirmRating = window.confirm(
+        `¿Deseas aceptar la solución de ${answer.authorName}?\n\n` +
+        `Esto otorgará +10 puntos de reputación al tutor y +5 puntos adicionales si otorgas 5 estrellas.\n` +
+        `Presiona Aceptar para calificar con 5 Estrellas (Excelente tutoría).`
+      );
+
+      if (!confirmRating) return;
+
+      answer.isAccepted = true;
+      answer.ratingStars = chosenStars;
+      question.status = 'Resuelta';
+
+      // Bonificación en el motor de gamificación
+      Gamification.awardSolution(answer.authorId, chosenStars);
+
+      State.saveQuestions();
+
+      this.renderDetailModalContent(question.id);
+      UI.renderQuestionsWall();
+      UI.renderGamificationView();
+      UI.renderAnalyticsView();
+
+      Utils.showToast(
+        `¡Solución aceptada con éxito! Se han sumado +15 puntos de reputación a ${answer.authorName}.`,
+        'gold'
+      );
+    },
+
+    // ------------------------------------------------------------------------
+    // Modal 3: Chat Simulado en Tiempo Real entre Pares (RF06)
+    // ------------------------------------------------------------------------
+    bindChatModal() {
+      const closeBtn = document.getElementById('btnCloseChatModal');
+      const form = document.getElementById('chatInputForm');
+      const input = document.getElementById('chatTextInput');
+
+      if (closeBtn) closeBtn.addEventListener('click', () => this.closeModal('chatModal'));
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const text = input.value.trim();
+          if (!text) return;
+
+          this.sendChatMessage(text);
+          input.value = '';
+        });
+      }
+    },
+
+    getChatKey(u1Id, u2Id) {
+      const ids = [u1Id, u2Id].sort();
+      return `chat-${ids[0]}-${ids[1]}`;
+    },
+
+    openChatModal(partnerId, partnerName, partnerRole, subjectContext) {
+      // Si intenta chatear consigo mismo, avisar amablemente
+      if (partnerId === State.currentUser.id) {
+        Utils.showToast('No puedes abrir un chat contigo mismo. Cambia de usuario en la barra superior para interactuar entre pares.', 'warning');
+        return;
+      }
+
+      State.activeChat = {
+        partnerId,
+        partnerName,
+        partnerRole: partnerRole || 'Tutor Par',
+        subjectContext: subjectContext || 'Orientación Académica ECBTI'
+      };
+
+      const titleEl = document.getElementById('chatPartnerName');
+      const roleEl = document.getElementById('chatPartnerRole');
+      const avatarEl = document.getElementById('chatPartnerAvatar');
+
+      if (titleEl) titleEl.textContent = partnerName;
+      if (roleEl) roleEl.textContent = `${partnerRole} · ${subjectContext}`;
+      if (avatarEl) avatarEl.textContent = Utils.getInitials(partnerName);
+
+      this.renderChatMessages();
+      this.openModal('chatModal');
+    },
+
+    renderChatMessages() {
+      const container = document.getElementById('chatMessagesContainer');
+      if (!container || !State.activeChat.partnerId) return;
+
+      const chatKey = this.getChatKey(State.currentUser.id, State.activeChat.partnerId);
+      const messages = State.chats[chatKey] || [];
+
+      container.innerHTML = '';
+
+      if (messages.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 2rem 1rem; color: var(--unad-text-muted); font-size: 0.85rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.4rem;">💬</div>
+            <strong>Canal de Tutoría Sincrónica UNAD</strong><br>
+            Inicia la conversación académica sobre <em>${Utils.escapeHTML(State.activeChat.subjectContext || '')}</em>.
+          </div>
+        `;
+      } else {
+        messages.forEach(msg => {
+          const isOutgoing = msg.senderId === State.currentUser.id;
+          const bubble = document.createElement('div');
+          bubble.className = `chat-bubble ${isOutgoing ? 'outgoing' : 'incoming'}`;
+          bubble.innerHTML = `
+            <div>${Utils.escapeHTML(msg.text)}</div>
+            <span class="chat-time-tag">${msg.time || 'Ahora'}</span>
+          `;
+          container.appendChild(bubble);
+        });
+      }
+
+      // Scroll automático al fondo
+      container.scrollTop = container.scrollHeight;
+    },
+
+    sendChatMessage(text) {
+      const chatKey = this.getChatKey(State.currentUser.id, State.activeChat.partnerId);
+      if (!State.chats[chatKey]) State.chats[chatKey] = [];
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      // Mensaje del usuario
+      const userMessage = {
+        senderId: State.currentUser.id,
+        senderName: State.currentUser.name,
+        text,
+        time: timeStr,
+        timestamp: Date.now()
+      };
+
+      State.chats[chatKey].push(userMessage);
+      State.saveChats();
+      this.renderChatMessages();
+
+      // RF06: Motor de simulación de respuesta automatizada inteligente
+      this.simulatePartnerResponse(chatKey, text);
+    },
+
+    simulatePartnerResponse(chatKey, promptText) {
+      const typingIndicator = document.getElementById('chatTypingIndicator');
+      const partnerName = State.activeChat.partnerName || 'Tutor Par';
+      const subject = (State.activeChat.subjectContext || '').toLowerCase();
+
+      // 1. Mostrar estado "Escribiendo..." tras 1.2s
+      setTimeout(() => {
+        if (typingIndicator) typingIndicator.classList.add('show');
+        const container = document.getElementById('chatMessagesContainer');
+        if (container) container.scrollTop = container.scrollHeight;
+
+        // 2. Enviar respuesta pedagógica tras 2.4s adicionales
+        setTimeout(() => {
+          if (typingIndicator) typingIndicator.classList.remove('show');
+
+          // Generación de respuesta contextual pedagógica
+          let responseText = '';
+          const lower = promptText.toLowerCase();
+
+          if (lower.includes('gracias') || lower.includes('muchas gracias')) {
+            responseText = `¡Con mucho gusto! Como tutores pares de la UNAD nuestro compromiso es el aprendizaje autónomo y colaborativo. Recuerda revisar la rúbrica TIGRE en el foro.`;
+          } else if (lower.includes('derivada') || lower.includes('calculo') || subject.includes('cálculo')) {
+            responseText = `Entendido. En este ejercicio de cálculo te recomiendo identificar claramente f(u) y u(x). Aplica primero la derivada de la función trigonométrica y luego multiplica por la derivada algebraica interna.`;
+          } else if (lower.includes('javascript') || lower.includes('codigo') || lower.includes('array') || subject.includes('programación')) {
+            responseText = `Excelente consulta. Recuerda que los métodos declarativos como filter, map y reduce son inmutables. Prueba encapsulando la condición dentro de una función flecha limpia.`;
+          } else if (lower.includes('matrices') || lower.includes('algebra') || subject.includes('álgebra')) {
+            responseText = `Para matrices en álgebra lineal, verifica siempre la compatibilidad de filas y columnas (m x n con n x p). La traspuesta invierte el orden del producto.`;
+          } else {
+            responseText = `He recibido tu mensaje. He revisado tu planteamiento y te sugiero consultar también el repositorio de OVI y OVA de la ECBTI en el campus virtual. ¿Te parece si revisamos un ejemplo paso a paso?`;
+          }
+
+          const now = new Date();
+          const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          const partnerMessage = {
+            senderId: State.activeChat.partnerId,
+            senderName: partnerName,
+            text: responseText,
+            time: timeStr,
+            timestamp: Date.now()
+          };
+
+          if (!State.chats[chatKey]) State.chats[chatKey] = [];
+          State.chats[chatKey].push(partnerMessage);
+          State.saveChats();
+          this.renderChatMessages();
+        }, 2200);
+      }, 1000);
+    },
+
+    // ------------------------------------------------------------------------
+    // Modal 4: Registro / Inicio de Sesión UNAD (RF01)
+    // ------------------------------------------------------------------------
+    bindRegisterModal() {
+      const openBtn = document.getElementById('btnOpenRegisterModal');
+      const closeBtn = document.getElementById('btnCloseRegisterModal');
+      const cancelBtn = document.getElementById('btnCancelRegister');
+      const form = document.getElementById('registerUserForm');
+
+      if (openBtn) openBtn.addEventListener('click', () => {
+        document.getElementById('userDropdownMenu').classList.remove('show');
+        this.openModal('registerModal');
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', () => this.closeModal('registerModal'));
+      if (cancelBtn) cancelBtn.addEventListener('click', () => this.closeModal('registerModal'));
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('regName').value.trim();
+          const email = document.getElementById('regEmail').value.trim().toLowerCase();
+          const cead = document.getElementById('regCead').value;
+          const program = document.getElementById('regProgram').value;
+          const role = document.getElementById('regRole').value;
+
+          // Validación de correo institucional UNAD
+          if (!email.endsWith('@unad.edu.co') && !email.endsWith('@unadvirtual.edu.co')) {
+            Utils.showToast('El correo debe ser institucional oficial (@unad.edu.co o @unadvirtual.edu.co).', 'warning');
+            return;
+          }
+
+          // Si el usuario ya existe por correo, cambiar a ese usuario
+          let existing = State.users.find(u => u.email === email);
+          if (existing) {
+            State.switchUser(existing.id);
+            form.reset();
+            this.closeModal('registerModal');
+            UI.renderCurrentUserWidget();
+            UI.renderAll();
+            Utils.showToast(`Bienvenido de nuevo, ${existing.name}. Sesión iniciada con éxito.`, 'success');
+            return;
+          }
+
+          // Crear nuevo usuario
+          const colors = ['#002B49', '#0083B0', '#E87722', '#10B981', '#7C3AED', '#DB2777'];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+          const newUser = {
+            id: `usr-${Date.now()}`,
+            name,
+            email,
+            role,
+            program,
+            cead,
+            points: role === 'Tutor Par' ? 50 : 10,
+            ratingAvg: 5.0,
+            ratingsCount: 0,
+            solvedCount: 0,
+            specialties: [program],
+            badges: ['Bienvenida UNAD', 'Mentor Solidario'],
+            avatarBg: randomColor
+          };
+
+          State.users.push(newUser);
+          State.saveUsers();
+          State.switchUser(newUser.id);
+
+          form.reset();
+          this.closeModal('registerModal');
+          UI.renderCurrentUserWidget();
+          UI.renderAll();
+
+          Utils.showToast(`¡Usuario institucional ${newUser.name} registrado y autenticado exitosamente!`, 'success');
+        });
+      }
+    }
+  };
+
+  // ==========================================================================
+  // 8. EXPORTACIÓN DE DATOS PARA PROYECTO DE GRADO (RF08)
+  // ==========================================================================
+  const Exporter = {
+    init() {
+      const btnJson = document.getElementById('btnExportJson');
+      const btnCsv = document.getElementById('btnExportCsv');
+
+      if (btnJson) btnJson.addEventListener('click', () => this.exportJSON());
+      if (btnCsv) btnCsv.addEventListener('click', () => this.exportCSV());
+    },
+
+    exportJSON() {
+      const dataset = {
+        metadata: {
+          platform: 'TutorUNAD - Sistema de Tutorías entre Estudiantes',
+          institution: 'Universidad Nacional Abierta y a Distancia (UNAD) - ECBTI',
+          exportDate: new Date().toISOString(),
+          version: '1.0.0-ECBTI-TESIS'
+        },
+        analytics: {
+          totalQuestions: State.questions.length,
+          resolvedQuestions: State.questions.filter(q => q.status === 'Resuelta').length,
+          unansweredQuestions: State.questions.filter(q => q.answers.length === 0).length,
+          totalUsers: State.users.length
+        },
+        users: State.users,
+        questions: State.questions,
+        chats: State.chats
+      };
+
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(dataset, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute('href', dataStr);
+      downloadAnchor.setAttribute('download', `tutorunad_dataset_${Date.now()}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+
+      Utils.showToast('Dataset JSON completo exportado correctamente.', 'success');
+    },
+
+    exportCSV() {
+      const rows = [
+        ['ID_Duda', 'Titulo', 'Asignatura', 'Tags', 'Estado', 'Autor', 'Rol_Autor', 'CEAD', 'Total_Respuestas', 'Solucion_Aceptada', 'Fecha_Registro']
+      ];
+
+      State.questions.forEach(q => {
+        const hasAccepted = q.answers.some(a => a.isAccepted) ? 'SI' : 'NO';
+        const dateStr = new Date(q.createdAt).toISOString();
+        rows.push([
+          q.id,
+          `"${(q.title || '').replace(/"/g, '""')}"`,
+          `"${q.subject || ''}"`,
+          `"${(q.tags || []).join(';')}"`,
+          q.status,
+          `"${q.authorName || ''}"`,
+          `"${q.authorRole || ''}"`,
+          `"${q.authorCead || ''}"`,
+          q.answers.length,
+          hasAccepted,
+          dateStr
+        ]);
+      });
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(r => r.join(',')).join('\n');
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute('href', encodeURI(csvContent));
+      downloadAnchor.setAttribute('download', `tutorunad_dudas_respuestas_${Date.now()}.csv`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+
+      Utils.showToast('Matriz CSV para Excel y SPSS exportada correctamente.', 'success');
+    }
+  };
+
+  // ==========================================================================
+  // 9. ENLACE DE EVENTOS GLOBALES Y NAVEGACIÓN SPA
+  // ==========================================================================
+  function setupEventListeners() {
+    // 1. Navegación por pestañas SPA
+    const navLinks = document.querySelectorAll('.main-nav .nav-link');
+    const views = document.querySelectorAll('.view-section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetViewId = link.getAttribute('data-view');
+
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        views.forEach(v => {
+          if (v.id === targetViewId) {
+            v.classList.add('active-view');
+          } else {
+            v.classList.remove('active-view');
+          }
+        });
+
+        if (targetViewId === 'view-gamification') {
+          UI.renderGamificationView();
+        } else if (targetViewId === 'view-analytics') {
+          UI.renderAnalyticsView();
+        } else if (targetViewId === 'view-wall') {
+          UI.renderQuestionsWall();
+        }
+      });
+    });
+
+    // 2. Dropdown de Switch de Usuario
+    const userSwitchBtn = document.getElementById('userSwitchBtn');
+    const userDropdownMenu = document.getElementById('userDropdownMenu');
+
+    if (userSwitchBtn && userDropdownMenu) {
+      userSwitchBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdownMenu.classList.toggle('show');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!userDropdownMenu.contains(e.target) && !userSwitchBtn.contains(e.target)) {
+          userDropdownMenu.classList.remove('show');
+        }
+      });
+    }
+
+    // 3. Buscador en tiempo real
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        State.filters.searchTerm = e.target.value;
+        UI.renderQuestionsWall();
+      });
+    }
+
+    // 4. Filtro por asignatura
+    const subjectFilterSelect = document.getElementById('subjectFilterSelect');
+    if (subjectFilterSelect) {
+      subjectFilterSelect.addEventListener('change', (e) => {
+        State.filters.subject = e.target.value;
+        UI.renderQuestionsWall();
+      });
+    }
+
+    // 5. Ordenamiento dinámico
+    const sortBySelect = document.getElementById('sortBySelect');
+    if (sortBySelect) {
+      sortBySelect.addEventListener('change', (e) => {
+        State.filters.sortBy = e.target.value;
+        UI.renderQuestionsWall();
+      });
+    }
+
+    // 6. Chips de estado rápido
+    const statusChips = document.querySelectorAll('.chip-status-btn');
+    statusChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        statusChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        State.filters.status = chip.getAttribute('data-status');
+        UI.renderQuestionsWall();
+      });
+    });
+
+    // 7. Botón limpiar tag activo
+    const btnClearActiveTag = document.getElementById('btnClearActiveTag');
+    if (btnClearActiveTag) {
+      btnClearActiveTag.addEventListener('click', () => {
+        State.filters.selectedTag = '';
+        UI.renderQuestionsWall();
+      });
+    }
+
+    // 8. Botón rápido publicar en el banner institucional
+    const btnBannerPublish = document.getElementById('btnBannerPublish');
+    if (btnBannerPublish) {
+      btnBannerPublish.addEventListener('click', () => {
+        const btnOpen = document.getElementById('btnOpenPublishModal');
+        if (btnOpen) btnOpen.click();
+      });
+    }
+
+    // 9. Enlace del logo a Home
+    const brandNavHome = document.getElementById('brandNavHome');
+    if (brandNavHome) {
+      brandNavHome.addEventListener('click', () => {
+        document.querySelector('.main-nav .nav-link[data-view="view-wall"]')?.click();
+      });
+    }
+
+    // 10. Enlaces del footer
+    const footerLinkAnalytics = document.getElementById('footerLinkAnalytics');
+    if (footerLinkAnalytics) {
+      footerLinkAnalytics.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.main-nav .nav-link[data-view="view-analytics"]')?.click();
+      });
+    }
+
+    const footerLinkGamification = document.getElementById('footerLinkGamification');
+    if (footerLinkGamification) {
+      footerLinkGamification.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.main-nav .nav-link[data-view="view-gamification"]')?.click();
+      });
+    }
+
+    const footerLinkExport = document.getElementById('footerLinkExport');
+    if (footerLinkExport) {
+      footerLinkExport.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.main-nav .nav-link[data-view="view-analytics"]')?.click();
+      });
+    }
+  }
+
+  // ==========================================================================
+  // 10. ARRANQUE DE LA APLICACIÓN
+  // ==========================================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    State.init();
+    UI.renderCurrentUserWidget();
+    UI.renderAll();
+    Modals.init();
+    Exporter.init();
+    setupEventListeners();
+  });
+
+})();
+
+    </script>
+  </body>
+</html>

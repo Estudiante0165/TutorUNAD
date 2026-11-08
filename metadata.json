@@ -1,0 +1,6 @@
+{
+  "name": "TutorUNAD - Plataforma Web de Tutorías entre Estudiantes UNAD",
+  "description": "Plataforma web colaborativa de tutorías académicas entre pares para la Universidad Nacional Abierta y a Distancia (UNAD, ECBTI) con gamificación, muro de dudas y chat en tiempo real.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
